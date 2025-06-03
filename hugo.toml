@@ -1,0 +1,28 @@
+baseURL = "https://www.tamochi.cn/"
+languageCode = "zh-cn"
+title = "Blog Chii"
+theme = "PaperMod"
+
+[params]
+env = "production"
+author = "Chius"
+defaultTheme = "auto"
+ShowReadingTime = true
+ShowWordCount = true
+ShowShareButtons = true
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+disableThemeToggle = false
+
+[params.profileMode]
+enabled = true
+title = "Hello World"
+subtitle = "Welcome to my blog"
+
+  [[params.profileMode.buttons]]
+  name = "Posts"
+  url = "/posts"
+
+  [[params.profileMode.buttons]]
+  name = "Github"
+  url = "https://github.com/"
