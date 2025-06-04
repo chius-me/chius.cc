@@ -1,6 +1,6 @@
 baseURL = "https://www.tamochi.cn/"
 languageCode = "zh-cn"
-title = "Blog Chii"
+title = "Blogus Chii"
 theme = "PaperMod"
 
 [params]
