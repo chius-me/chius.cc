@@ -5,9 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Posts | Blog Chii</title>
+<title>Posts | Blogus Chii</title>
 <meta name="keywords" content="">
-<meta name="description" content="Posts - Blog Chii">
+<meta name="description" content="Posts - Blogus Chii">
 <meta name="author" content="Chius">
 <link rel="canonical" href="http://localhost:1313/posts/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
@@ -71,8 +71,19 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="http://localhost:1313/posts/">
-  <meta property="og:site_name" content="Blog Chii">
+</script><style>
+@media (max-width: 768px) {
+  .post-meta-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+  }
+  .post-meta-right {
+    margin-top: 0.5em;
+  }
+}
+</style><meta property="og:url" content="http://localhost:1313/posts/">
+  <meta property="og:site_name" content="Blogus Chii">
   <meta property="og:title" content="Posts">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="website">
@@ -100,7 +111,7 @@
     <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Blog Chii (Alt + H)">Blog Chii</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Blogus Chii (Alt + H)">Blogus Chii</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -138,25 +149,28 @@
 <article class="post-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">Hello World
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
     </h2>
   </header>
   <div class="entry-content">
-    <p>这是我的第一篇 PaperMod 博客文章。
+    <p>test CI/CD again
 </p>
   </div>
-  <footer class="entry-footer"><span title='2026-03-27 21:38:47 +0800 CST'>March 27, 2026</span>&nbsp;·&nbsp;<span>1 min</span>&nbsp;·&nbsp;<span>3 words</span>&nbsp;·&nbsp;<span>Chius</span></footer>
+  <footer class="entry-footer"><div class="post-meta-container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+  <div class="post-meta-left"><span title='2026-03-27 21:38:47 +0800 CST'>March 27, 2026</span>&nbsp;·&nbsp;<span>1 min</span>&nbsp;·&nbsp;<span>3 words</span>&nbsp;·&nbsp;<span>Chius</span>
+  </div>
+  <div class="post-meta-right" style="display: flex; align-items: center; gap: 0.5em;"><div class="post-categories"><a href='http://localhost:1313/categories/test/' class='post-category'>Test</a>&nbsp;·&nbsp;<a href='http://localhost:1313/categories/demo/' class='post-category'>Demo</a></div><div class="post-external-links">
+      <a href="https://resume.lan.tamochi.cn/chius/main" target="_blank" rel="noopener">简历</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/tamochii" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</div></footer>
   <a class="entry-link" aria-label="post link to Hello World" href="http://localhost:1313/posts/hello-world/"></a>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">Blog Chii</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">Blogus Chii</a></span> · 
 
     <span>
         Powered by
