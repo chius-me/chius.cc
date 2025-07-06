@@ -1,41 +1,23 @@
-<div class="post-meta-container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-  <div class="post-meta-left">
-    {{- $scratch := newScratch }}
-    {{- if not .Date.IsZero -}}
-    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date) (.Date | time.Format (default ":date_long" site.Params.DateFormat)))) }}
-    {{- end }}
-    {{- if (.Param "ShowReadingTime") -}}
-    {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" (i18n "read_time" .ReadingTime | default (printf "%d min" .ReadingTime)))) }}
-    {{- end }}
-    {{- if (.Param "ShowWordCount") -}}
-    {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" (i18n "words" .WordCount | default (printf "%d words" .WordCount)))) }}
-    {{- end }}
-    {{- if not (.Param "hideAuthor") -}}
-    {{- with (partial "author.html" .) }}
-    {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" .)) }}
-    {{- end }}
-    {{- end }}
-    {{- with ($scratch.Get "meta") }}
-    {{- delimit . "&nbsp;·&nbsp;" | safeHTML -}}
-    {{- end }}
-  </div>
-  <div class="post-meta-right" style="display: flex; align-items: center; gap: 0.5em;">
-    {{- /* Categories */ -}}
-    {{- $categories := .GetTerms "categories" -}}
-    {{- if $categories -}}
-    <div class="post-categories">
-      {{- $links := slice -}}
-      {{- range $categories -}}
-        {{- $links = $links | append (printf "<a href='%s' class='post-category'>%s</a>" .Permalink .LinkTitle) -}}
-      {{- end -}}
-      {{- delimit $links "&nbsp;·&nbsp;" | safeHTML -}}
-    </div>
-    {{- end -}}
-    {{- /* Resume and GitHub links */ -}}
-    <div class="post-external-links">
-      <a href="https://resume.lan.tamochi.cn/chius/main" target="_blank" rel="noopener">简历</a>
-      &nbsp;·&nbsp;
-      <a href="https://github.com/tamochii" target="_blank" rel="noopener">GitHub</a>
-    </div>
-  </div>
-</div>
+{{- $scratch := newScratch }}
+
+{{- if not .Date.IsZero -}}
+{{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date) (.Date | time.Format (default ":date_long" site.Params.DateFormat)))) }}
+{{- end }}
+
+{{- if (.Param "ShowReadingTime") -}}
+{{- $scratch.Add "meta" (slice (printf "<span>%s</span>" (i18n "read_time" .ReadingTime | default (printf "%d min" .ReadingTime)))) }}
+{{- end }}
+
+{{- if (.Param "ShowWordCount") -}}
+{{- $scratch.Add "meta" (slice (printf "<span>%s</span>" (i18n "words" .WordCount | default (printf "%d words" .WordCount)))) }}
+{{- end }}
+
+{{- if not (.Param "hideAuthor") -}}
+{{- with (partial "author.html" .) }}
+{{- $scratch.Add "meta" (slice (printf "<span>%s</span>" .)) }}
+{{- end }}
+{{- end }}
+
+{{- with ($scratch.Get "meta") }}
+{{- delimit . "&nbsp;·&nbsp;" | safeHTML -}}
+{{- end -}}

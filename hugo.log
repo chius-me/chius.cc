@@ -1,0 +1,34 @@
+Watching for changes in /home/chius/repo/gitea/www/archetypes, /home/chius/repo/gitea/www/assets, /home/chius/repo/gitea/www/content/posts, /home/chius/repo/gitea/www/data, /home/chius/repo/gitea/www/i18n, /home/chius/repo/gitea/www/layouts/partials, /home/chius/repo/gitea/www/static, /home/chius/repo/gitea/www/themes/PaperMod/assets/{css,js}, /home/chius/repo/gitea/www/themes/PaperMod/i18n, /home/chius/repo/gitea/www/themes/PaperMod/layouts/{_default,partials,shortcodes}
+Watching for config changes in /home/chius/repo/gitea/www/hugo.toml
+Start building sites … 
+hugo v0.157.0-7747abbb316b03c8f353fd3be62d5011fa883ee6+extended linux/amd64 BuildDate=2026-02-25T16:38:33Z VendorInfo=gohugoio
+
+
+                  │ EN 
+──────────────────┼────
+ Pages            │ 15 
+ Paginator pages  │  0 
+ Non-page files   │  0 
+ Static files     │  0 
+ Processed images │  0 
+ Aliases          │  3 
+ Cleaned          │  0 
+
+Built in 12 ms
+Environment: "development"
+Serving pages from disk
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0) 
+Press Ctrl+C to stop
+
+Change detected, rebuilding site (#1).
+2026-03-27 22:49:29.067 +0800
+Template changed /partials/header.html
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 13 ms
+
+Change detected, rebuilding site (#2).
+2026-03-27 22:50:31.460 +0800
+Template changed /partials/post_meta.html
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 13 ms
