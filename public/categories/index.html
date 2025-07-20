@@ -72,6 +72,36 @@
     }
 
 </script><style>
+nav.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav.nav .logo {
+  display: flex;
+  align-items: center;
+}
+nav.nav #menu {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+#menu li {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 1.5em;
+}
+#menu li a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+#menu li a svg {
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
 @media (max-width: 768px) {
   .post-meta-container {
     flex-direction: column;
@@ -80,6 +110,19 @@
   }
   .post-meta-right {
     margin-top: 0.5em;
+  }
+  nav.nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  nav.nav #menu {
+    margin-top: 1em;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #menu li {
+    margin-left: 0.75em;
+    margin-right: 0.75em;
   }
 }
 </style><meta property="og:url" content="http://localhost:1313/categories/">
@@ -120,28 +163,41 @@
                 </button>
             </div>
         </div>
-        <ul id="menu"><li>
-                <a href="/categories/" title="文章分类">分类</a>
+        <ul id="menu">
+            <li>
+                <a href="/categories/" title="文章分类">
+                    <span class="active">
+                        分类
+                    </span>
+                </a>
             </li>
             <li>
-                <a href="https://resume.lan.tamochi.cn/chius/main" target="_blank" rel="noopener" title="简历">简历</a>
-                &nbsp;
-                <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
-                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
-                    <path d="M15 3h6v6"></path>
-                    <path d="M10 14L21 3"></path>
-                </svg>
+                <a href="https://resume.lan.tamochi.cn/chius/main" target="_blank" rel="noopener" title="简历">
+                    <span>
+                        简历
+                    </span>
+                    &nbsp;
+                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                        <path d="M15 3h6v6"></path>
+                        <path d="M10 14L21 3"></path>
+                    </svg>
+                </a>
             </li>
             <li>
-                <a href="https://github.com/tamochii" target="_blank" rel="noopener" title="GitHub">GitHub</a>
-                &nbsp;
-                <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
-                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
-                    <path d="M15 3h6v6"></path>
-                    <path d="M10 14L21 3"></path>
-                </svg>
+                <a href="https://github.com/tamochii" target="_blank" rel="noopener" title="GitHub">
+                    <span>
+                        GitHub
+                    </span>
+                    &nbsp;
+                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                        <path d="M15 3h6v6"></path>
+                        <path d="M10 14L21 3"></path>
+                    </svg>
+                </a>
             </li>
         </ul>
     </nav>

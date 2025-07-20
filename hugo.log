@@ -32,3 +32,21 @@ Change detected, rebuilding site (#2).
 Template changed /partials/post_meta.html
 Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
 Total in 13 ms
+
+Change detected, rebuilding site (#3).
+2026-03-27 23:03:44.265 +0800
+Template changed /partials/header.html
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 15 ms
+
+Change detected, rebuilding site (#4).
+2026-03-27 23:05:26.212 +0800
+Template changed /partials/extend_head.html
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 12 ms
+
+Change detected, rebuilding site (#5).
+2026-03-27 23:06:14.282 +0800
+Template changed /partials/extend_head.html
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 13 ms

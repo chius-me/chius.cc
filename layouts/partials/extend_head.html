@@ -1,4 +1,34 @@
 <style>
+nav.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav.nav .logo {
+  display: flex;
+  align-items: center;
+}
+nav.nav #menu {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+#menu li {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 1.5em;
+}
+#menu li a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+#menu li a svg {
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
 @media (max-width: 768px) {
   .post-meta-container {
     flex-direction: column;
@@ -7,6 +37,19 @@
   }
   .post-meta-right {
     margin-top: 0.5em;
+  }
+  nav.nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  nav.nav #menu {
+    margin-top: 1em;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #menu li {
+    margin-left: 0.75em;
+    margin-right: 0.75em;
   }
 }
 </style>
