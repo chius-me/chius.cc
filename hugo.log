@@ -50,3 +50,9 @@ Change detected, rebuilding site (#5).
 Template changed /partials/extend_head.html
 Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
 Total in 13 ms
+
+Change detected, rebuilding site (#6).
+2026-03-27 23:22:33.995 +0800
+Template changed /partials/footer.html
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 21 ms
