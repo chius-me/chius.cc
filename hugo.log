@@ -62,3 +62,9 @@ Change detected, rebuilding site (#7).
 Template changed /partials/footer.html
 Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
 Total in 15 ms
+
+Change detected, rebuilding site (#8).
+2026-03-27 23:48:52.966 +0800
+Source changed /posts/hello-world.md
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 6 ms
