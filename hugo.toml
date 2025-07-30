@@ -15,14 +15,12 @@ ShowBreadCrumbs = true
 disableThemeToggle = false
 
 [params.profileMode]
-enabled = true
-title = "Hello World"
-subtitle = "Welcome to my blog"
+enabled = false
 
-  [[params.profileMode.buttons]]
-  name = "Posts"
-  url = "/posts"
+[params.homeInfoParams]
+Title = "Hello World"
+Content = "Welcome to my blog"
 
-  [[params.profileMode.buttons]]
-  name = "Github"
-  url = "https://github.com/"
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/tamochii"

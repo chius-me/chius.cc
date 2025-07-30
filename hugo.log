@@ -68,3 +68,28 @@ Change detected, rebuilding site (#8).
 Source changed /posts/hello-world.md
 Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
 Total in 6 ms
+
+Change of config file detected, rebuilding site (#9).
+2026-03-27 23:52:10.035 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 92 ms
+
+Change of config file detected, rebuilding site (#10).
+2026-03-27 23:52:16.086 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 44 ms
+
+Change of config file detected, rebuilding site (#11).
+2026-03-27 23:52:20.121 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 49 ms
+
+Change of config file detected, rebuilding site (#12).
+2026-03-27 23:52:55.684 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 51 ms
+
+Change of config file detected, rebuilding site (#13).
+2026-03-27 23:52:57.410 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 51 ms
