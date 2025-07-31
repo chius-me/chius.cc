@@ -93,3 +93,38 @@ Change of config file detected, rebuilding site (#13).
 2026-03-27 23:52:57.410 +0800
 Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
 Rebuilt in 51 ms
+
+Change of config file detected, rebuilding site (#14).
+2026-03-27 23:57:30.388 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 52 ms
+
+Change detected, rebuilding site (#15).
+2026-03-27 23:58:09.356 +0800
+Source changed /archives.md
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 14 ms
+
+Change detected, rebuilding site (#16).
+2026-03-27 23:58:14.893 +0800
+Source changed /archives.md
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 13 ms
+
+Change of config file detected, rebuilding site (#17).
+2026-03-27 23:58:26.783 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 53 ms
+
+Change of config file detected, rebuilding site (#18).
+2026-03-28 00:02:37.272 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 60 ms
+
+Change of config file detected, rebuilding site (#19).
+2026-03-28 00:02:42.236 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 56 ms
+
+Change of config file detected, rebuilding site (#20).
+2026-03-28 00:02:43.882 +0800

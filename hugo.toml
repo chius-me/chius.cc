@@ -13,14 +13,22 @@ ShowShareButtons = true
 ShowPostNavLinks = true
 ShowBreadCrumbs = true
 disableThemeToggle = false
+ShowRssButtonInSectionTermList = true
 
 [params.profileMode]
 enabled = false
 
 [params.homeInfoParams]
-Title = "Hello World"
+Title = "Chius"
 Content = "Welcome to my blog"
 
 [[params.socialIcons]]
 name = "github"
 url = "https://github.com/tamochii"
+
+[menu]
+  [[menu.main]]
+  identifier = "archives"
+  name = "归档"
+  url = "/archives/"
+  weight = 10
