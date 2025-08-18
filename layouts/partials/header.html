@@ -105,17 +105,7 @@
                 </a>
             </li>
             {{- end }}
-            {{- /* Custom links */ -}}
-            {{- $currentPage := . }}
-            {{- $menu_item_url := (cond (strings.HasSuffix "/categories/" "/") "/categories/" (printf "%s/" "/categories/") ) | absLangURL }}
-            {{- $page_url:= $currentPage.Permalink | absLangURL }}
-            <li>
-                <a href="/categories/" title="文章分类">
-                    <span {{- if eq $menu_item_url $page_url }} class="active" {{- end }}>
-                        分类
-                    </span>
-                </a>
-            </li>
+
         </ul>
     </nav>
 </header>

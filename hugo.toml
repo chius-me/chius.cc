@@ -2,6 +2,8 @@ baseURL = "https://www.tamochi.cn/"
 languageCode = "zh-cn"
 title = "Blogus Chii"
 theme = "PaperMod"
+defaultContentLanguage = "zh" 
+hasCJKLanguage = true
 
 [params]
 env = "production"
@@ -20,7 +22,7 @@ enabled = false
 
 [params.homeInfoParams]
 Title = "Chius"
-Content = "Welcome to my blog"
+Content = "欢迎来到我的个人博客"
 
 [[params.socialIcons]]
 name = "github"

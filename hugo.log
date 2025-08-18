@@ -6,7 +6,7 @@ hugo v0.157.0-7747abbb316b03c8f353fd3be62d5011fa883ee6+extended linux/amd64 Buil
 
                   │ EN 
 ──────────────────┼────
- Pages            │ 15 
+ Pages            │ 14 
  Paginator pages  │  0 
  Non-page files   │  0 
  Static files     │  0 
@@ -14,117 +14,19 @@ hugo v0.157.0-7747abbb316b03c8f353fd3be62d5011fa883ee6+extended linux/amd64 Buil
  Aliases          │  3 
  Cleaned          │  0 
 
-Built in 12 ms
+Built in 9 ms
 Environment: "development"
 Serving pages from disk
 Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
 Web Server is available at http://localhost:1313/ (bind address 0.0.0.0) 
 Press Ctrl+C to stop
 
-Change detected, rebuilding site (#1).
-2026-03-27 22:49:29.067 +0800
-Template changed /partials/header.html
+Change of config file detected, rebuilding site (#1).
+2026-03-28 00:11:33.524 +0800
 Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Total in 13 ms
+Rebuilt in 61 ms
 
-Change detected, rebuilding site (#2).
-2026-03-27 22:50:31.460 +0800
-Template changed /partials/post_meta.html
+Change of config file detected, rebuilding site (#2).
+2026-03-28 00:11:53.097 +0800
 Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Total in 13 ms
-
-Change detected, rebuilding site (#3).
-2026-03-27 23:03:44.265 +0800
-Template changed /partials/header.html
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Total in 15 ms
-
-Change detected, rebuilding site (#4).
-2026-03-27 23:05:26.212 +0800
-Template changed /partials/extend_head.html
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Total in 12 ms
-
-Change detected, rebuilding site (#5).
-2026-03-27 23:06:14.282 +0800
-Template changed /partials/extend_head.html
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Total in 13 ms
-
-Change detected, rebuilding site (#6).
-2026-03-27 23:22:33.995 +0800
-Template changed /partials/footer.html
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Total in 21 ms
-
-Change detected, rebuilding site (#7).
-2026-03-27 23:32:07.723 +0800
-Template changed /partials/footer.html
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Total in 15 ms
-
-Change detected, rebuilding site (#8).
-2026-03-27 23:48:52.966 +0800
-Source changed /posts/hello-world.md
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Total in 6 ms
-
-Change of config file detected, rebuilding site (#9).
-2026-03-27 23:52:10.035 +0800
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Rebuilt in 92 ms
-
-Change of config file detected, rebuilding site (#10).
-2026-03-27 23:52:16.086 +0800
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Rebuilt in 44 ms
-
-Change of config file detected, rebuilding site (#11).
-2026-03-27 23:52:20.121 +0800
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Rebuilt in 49 ms
-
-Change of config file detected, rebuilding site (#12).
-2026-03-27 23:52:55.684 +0800
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Rebuilt in 51 ms
-
-Change of config file detected, rebuilding site (#13).
-2026-03-27 23:52:57.410 +0800
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Rebuilt in 51 ms
-
-Change of config file detected, rebuilding site (#14).
-2026-03-27 23:57:30.388 +0800
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Rebuilt in 52 ms
-
-Change detected, rebuilding site (#15).
-2026-03-27 23:58:09.356 +0800
-Source changed /archives.md
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Total in 14 ms
-
-Change detected, rebuilding site (#16).
-2026-03-27 23:58:14.893 +0800
-Source changed /archives.md
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Total in 13 ms
-
-Change of config file detected, rebuilding site (#17).
-2026-03-27 23:58:26.783 +0800
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Rebuilt in 53 ms
-
-Change of config file detected, rebuilding site (#18).
-2026-03-28 00:02:37.272 +0800
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Rebuilt in 60 ms
-
-Change of config file detected, rebuilding site (#19).
-2026-03-28 00:02:42.236 +0800
-Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
-Rebuilt in 56 ms
-
-Change of config file detected, rebuilding site (#20).
-2026-03-28 00:02:43.882 +0800
+Rebuilt in 48 ms
