@@ -66,3 +66,83 @@ Change detected, rebuilding site (#8).
 Source changed /posts/_index.md
 Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
 Total in 7 ms
+
+Change of config file detected, rebuilding site (#9).
+2026-03-28 00:22:09.361 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 55 ms
+
+Change of config file detected, rebuilding site (#10).
+2026-03-28 00:22:20.415 +0800
+ERROR Failed to reload config: failed to load config: "/home/chius/repo/gitea/www/hugo.toml:1:1": unmarshal failed: toml: key ShowBreadCrumbs is already defined
+Rebuilt in 0 ms
+
+Change of config file detected, rebuilding site (#11).
+2026-03-28 00:22:27.857 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 59 ms
+
+Change of config file detected, rebuilding site (#12).
+2026-03-28 00:22:35.376 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 51 ms
+
+Change of config file detected, rebuilding site (#13).
+2026-03-28 00:23:15.866 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 52 ms
+
+Change of config file detected, rebuilding site (#14).
+2026-03-28 00:23:24.341 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 55 ms
+
+Change detected, rebuilding site (#15).
+2026-03-28 00:23:48.892 +0800
+Source changed /search.md
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 15 ms
+
+Change detected, rebuilding site (#16).
+2026-03-28 00:23:51.878 +0800
+Source changed /search.md
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 33 ms
+
+Change of config file detected, rebuilding site (#17).
+2026-03-28 00:24:13.367 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 61 ms
+
+Change of config file detected, rebuilding site (#18).
+2026-03-28 00:24:15.863 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 64 ms
+
+Change of config file detected, rebuilding site (#19).
+2026-03-28 00:24:17.929 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 66 ms
+
+Change of config file detected, rebuilding site (#20).
+2026-03-28 00:25:37.821 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 72 ms
+
+Change of config file detected, rebuilding site (#21).
+2026-03-28 00:25:56.339 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 66 ms
+adding created directory to watchlist /home/chius/repo/gitea/www/layouts/partials/svg
+
+Change detected, rebuilding site (#22).
+2026-03-28 00:26:34.797 +0800
+Template added /partials/svg
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 29 ms
+
+Change detected, rebuilding site (#23).
+2026-03-28 00:27:17.775 +0800
+Template added /partials/svg/gitea.svg
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 35 ms
