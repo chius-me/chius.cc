@@ -29,6 +29,13 @@ name = "github"
 url = "https://github.com/tamochii"
 
 [menu]
+
+  [[menu.main]]
+  identifier = "posts"
+  name = "文章"
+  url = "/posts/"
+  weight = 5
+
   [[menu.main]]
   identifier = "archives"
   name = "归档"

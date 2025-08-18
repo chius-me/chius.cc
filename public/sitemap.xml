@@ -8,13 +8,13 @@
     <loc>http://localhost:1313/posts/hello-world/</loc>
     <lastmod>2026-03-27T21:38:47+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>http://localhost:1313/tags/test/</loc>
     <lastmod>2026-03-27T21:38:47+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
     <lastmod>2026-03-27T21:38:47+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/test/</loc>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2026-03-27T21:38:47+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>

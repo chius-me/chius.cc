@@ -30,3 +30,39 @@ Change of config file detected, rebuilding site (#2).
 2026-03-28 00:11:53.097 +0800
 Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
 Rebuilt in 48 ms
+adding created directory to watchlist /home/chius/repo/gitea/www/content/tags
+
+Change detected, rebuilding site (#3).
+2026-03-28 00:17:04.939 +0800
+Source changed /tags
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 8 ms
+
+Change detected, rebuilding site (#4).
+2026-03-28 00:17:16.916 +0800
+Source changed /tags/_index.md
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 8 ms
+
+Change detected, rebuilding site (#5).
+2026-03-28 00:17:19.423 +0800
+Source changed /tags/_index.md
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 6 ms
+
+Change of config file detected, rebuilding site (#6).
+2026-03-28 00:18:42.419 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 75 ms
+
+Change detected, rebuilding site (#7).
+2026-03-28 00:19:04.138 +0800
+Source changed /posts/_index.md
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 11 ms
+
+Change detected, rebuilding site (#8).
+2026-03-28 00:19:01.906 +0800
+Source changed /posts/_index.md
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 7 ms
