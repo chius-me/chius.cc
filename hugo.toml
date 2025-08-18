@@ -32,3 +32,9 @@ url = "https://github.com/tamochii"
   name = "归档"
   url = "/archives/"
   weight = 10
+
+  [[menu.main]]
+  identifier = "tags"
+  name = "标签"
+  url = "/tags/"
+  weight = 20
