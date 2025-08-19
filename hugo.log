@@ -146,3 +146,30 @@ Change detected, rebuilding site (#23).
 Template added /partials/svg/gitea.svg
 Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
 Total in 35 ms
+
+Change of config file detected, rebuilding site (#24).
+2026-03-28 00:28:45.246 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 75 ms
+
+Change of config file detected, rebuilding site (#25).
+2026-03-28 00:30:13.238 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 74 ms
+
+Change detected, rebuilding site (#26).
+2026-03-28 00:30:20.233 +0800
+Template added /partials/svg/bilibili.svg
+Template added /partials/svg/gh.svg
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 33 ms
+
+Change of config file detected, rebuilding site (#27).
+2026-03-28 00:30:30.226 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 72 ms
+
+Change of config file detected, rebuilding site (#28).
+2026-03-28 00:30:47.789 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 80 ms

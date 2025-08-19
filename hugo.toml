@@ -22,15 +22,19 @@ enabled = false
 
 [params.homeInfoParams]
 Title = "Chius"
-Content = "欢迎来到我的个人博客"
+Content = "🥰欢迎来到我的个人博客"
 
 [[params.socialIcons]]
-name = "github"
+name = "gh"
 url = "https://github.com/tamochii"
 
 [[params.socialIcons]]
 name = "gitea"
 url = "https://git.tamochi.cn/chius"
+
+[[params.socialIcons]]
+name = "bilibili"
+url = "https://space.bilibili.com/215003532"
 
 [menu]
 
