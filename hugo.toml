@@ -25,7 +25,7 @@ Title = "Chius"
 Content = "🥰欢迎来到我的个人博客"
 
 [[params.socialIcons]]
-name = "gh"
+name = "git"
 url = "https://github.com/tamochii"
 
 [[params.socialIcons]]

@@ -173,3 +173,27 @@ Change of config file detected, rebuilding site (#28).
 2026-03-28 00:30:47.789 +0800
 Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
 Rebuilt in 80 ms
+
+Change detected, rebuilding site (#29).
+2026-03-28 00:34:39.183 +0800
+Template changed /partials/svg/gh.svg
+Template added /partials/svg/git.svg
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 33 ms
+
+Change of config file detected, rebuilding site (#30).
+2026-03-28 00:34:48.164 +0800
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Rebuilt in 79 ms
+
+Change detected, rebuilding site (#31).
+2026-03-28 00:35:17.191 +0800
+Source changed /posts/hello-world.md
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 15 ms
+
+Change detected, rebuilding site (#32).
+2026-03-28 00:35:24.650 +0800
+Source changed /posts/hello-world.md
+Web Server is available at http://localhost:1313/ (bind address 0.0.0.0)
+Total in 13 ms
