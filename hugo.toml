@@ -25,6 +25,10 @@ Title = "Chius"
 Content = "🥰欢迎来到我的个人博客"
 
 [[params.socialIcons]]
+name = "github"
+url = "https://github.com/tamochii"
+
+[[params.socialIcons]]
 name = "bilibili"
 url = "https://space.bilibili.com/215003532"
 
@@ -33,8 +37,8 @@ name = "gitea"
 url = "https://git.tamochi.cn/chius"
 
 [[params.socialIcons]]
-name = "github"
-url = "https://github.com/tamochii"
+name = "ko-fi"
+url = "https://ko-fi.com/chius"
 
 [menu]
 
