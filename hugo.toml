@@ -37,7 +37,7 @@ name = "gitea"
 url = "https://git.tamochi.cn/chius"
 
 [[params.socialIcons]]
-name = "ko-fi"
+name = "kofi"
 url = "https://ko-fi.com/chius"
 
 [menu]
