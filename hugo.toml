@@ -25,19 +25,19 @@ Title = "Chius"
 Content = "🥰欢迎来到我的个人博客"
 
 [[params.socialIcons]]
-name = "github"
+name = "githubgithub"
 url = "https://github.com/tamochii"
 
 [[params.socialIcons]]
-name = "bilibili"
+name = "bili"
 url = "https://space.bilibili.com/215003532"
 
 [[params.socialIcons]]
-name = "gitea"
+name = "giteagitea"
 url = "https://git.tamochi.cn/chius"
 
 [[params.socialIcons]]
-name = "ko-fi"
+name = "kofikofi"
 url = "https://ko-fi.com/chius"
 
 [menu]
