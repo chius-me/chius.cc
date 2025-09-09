@@ -17,6 +17,9 @@ ShowBreadCrumbs = false
 disableThemeToggle = false
 ShowRssButtonInSectionTermList = true
 
+[params.footer]
+text = "[鄂ICP备2025111741号](https://beian.miit.gov.cn/)"
+
 [params.profileMode]
 enabled = false
 
