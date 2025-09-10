@@ -8,14 +8,24 @@ hasCJKLanguage = true
 [params]
 env = "production"
 author = "Chius"
-defaultTheme = "auto"
+defaultTheme = "light"
+ShowToc = true
 ShowReadingTime = true
 ShowWordCount = true
 ShowShareButtons = false
 ShowPostNavLinks = true
 ShowBreadCrumbs = false
-disableThemeToggle = false
+disableThemeToggle = true
 ShowRssButtonInSectionTermList = true
+ShowCodeCopyButtons = true
+smoothScroll = true
+ShowFullTextinRSS = true
+hideFooter = false
+
+[params.editPost]
+URL = "https://git.tamochi.cn/chius/hugo/src/branch/main/content"
+Text = "在 Gitea 上编辑此页"
+appendFilePath = true
 
 [params.footer]
 text = "[鄂ICP备2025111741号](https://beian.miit.gov.cn/)"
