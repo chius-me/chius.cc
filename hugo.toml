@@ -7,6 +7,7 @@ hasCJKLanguage = true
 
 [params]
 env = "production"
+description = "Chius 的博客"
 author = "Chius"
 defaultTheme = "light"
 ShowToc = true
@@ -21,6 +22,9 @@ ShowCodeCopyButtons = true
 smoothScroll = true
 ShowFullTextinRSS = true
 hideFooter = false
+
+[params.assets]
+    favicon = "/favicon.png"
 
 [params.editPost]
 URL = "https://git.tamochi.cn/chius/hugo/src/branch/main/content"
