@@ -2,72 +2,94 @@ pipeline {
     agent any
 
     environment {
-        HUGO_VERSION = '0.157.0' 
+        HARBOR_REGISTRY = '10.0.0.134'
+        HARBOR_PROJECT = 'main'
+        IMAGE_NAME = 'hugo'
+        FULL_IMAGE_NAME = "${HARBOR_REGISTRY}/${HARBOR_PROJECT}/${IMAGE_NAME}"
+
+        DEPLOY_HOST = '10.0.0.135'
+        DEPLOY_DIR = '/opt/hugo'
+        HUGO_VERSION = '0.157.0'
     }
 
     stages {
         stage('克隆代码 (Checkout)') {
             steps {
-                git branch: 'main', 
-                    credentialsId: 'gitea-ssh-key', 
+                git branch: 'main',
+                    credentialsId: 'gitea-ssh-key',
                     url: 'ssh://git@10.0.0.131:2222/chius/hugo.git'
                 sh 'git submodule update --init --recursive'
+                script {
+                    env.IMAGE_TAG = sh(script: 'git rev-parse --short=12 HEAD', returnStdout: true).trim()
+                }
             }
         }
 
-        stage('配置 Hugo 环境 (Setup)') {
+        stage('构建 Docker 镜像 (Build Image)') {
             steps {
-                sh '''
-                    # 定义缓存目录 (存放在 Jenkins 用户的家目录下，跨越多次构建保留)
-                    CACHE_DIR="$HOME/.hugo_cache/v${HUGO_VERSION}"
-                    
-                    # 检查缓存是否存在
-                    if [ ! -f "${CACHE_DIR}/hugo" ]; then
-                        echo "未找到本地缓存，开始下载 Hugo 扩展版 v${HUGO_VERSION}..."
-                        mkdir -p "${CACHE_DIR}"
-                        wget -q -O hugo.tar.gz https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
-                        tar -xzf hugo.tar.gz -C "${CACHE_DIR}"
-                        chmod +x "${CACHE_DIR}/hugo"
-                    else
-                        echo "⚡ 命中缓存！直接使用已下载的 Hugo v${HUGO_VERSION}"
-                    fi
-                    
-                    # 将缓存的 hugo 复制到当前工作区，供下一步构建使用
-                    cp "${CACHE_DIR}/hugo" ./hugo
-                    ./hugo version
-                '''
+                echo "开始构建 Docker 镜像 ${FULL_IMAGE_NAME}:${IMAGE_TAG}..."
+                sh 'docker build --build-arg HUGO_VERSION=${HUGO_VERSION} -t ${FULL_IMAGE_NAME}:${IMAGE_TAG} -t ${FULL_IMAGE_NAME}:latest .'
             }
         }
 
-        stage('构建博客 (Build)') {
+        stage('推送到 Harbor (Push Image)') {
             steps {
-                sh './hugo --minify --gc --cleanDestinationDir'
+                echo '开始推送镜像到 Harbor...'
+                withCredentials([usernamePassword(credentialsId: 'harbor-robot-creds', passwordVariable: 'HARBOR_PWD', usernameVariable: 'HARBOR_USER')]) {
+                    sh 'echo "$HARBOR_PWD" | docker login ${HARBOR_REGISTRY} -u "$HARBOR_USER" --password-stdin'
+                    sh 'docker push ${FULL_IMAGE_NAME}:${IMAGE_TAG}'
+                    sh 'docker push ${FULL_IMAGE_NAME}:latest'
+                }
             }
         }
 
-        stage('部署到 Caddy (Deploy)') {
+        stage('部署到 Docker 主机 (Deploy)') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'homelab-root', keyFileVariable: 'SSH_KEY')]) {
+                echo "通过 SSH 部署到 ${DEPLOY_HOST}:${DEPLOY_DIR}..."
+                withCredentials([
+                    sshUserPrivateKey(credentialsId: 'homelab-root', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER'),
+                    usernamePassword(credentialsId: 'harbor-robot-creds', passwordVariable: 'HARBOR_PWD', usernameVariable: 'HARBOR_USER')
+                ]) {
                     sh '''
-                        echo "开始同步静态文件到 Caddy 服务器 (10.0.0.104)..."
-                        rsync -avz --delete -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" public/ root@10.0.0.104:/var/www/html/
+                        set -eu
+
+                        ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no "$SSH_USER@$DEPLOY_HOST" "mkdir -p '$DEPLOY_DIR'"
+                        scp -i "$SSH_KEY" -o StrictHostKeyChecking=no docker-compose.yml "$SSH_USER@$DEPLOY_HOST:$DEPLOY_DIR/docker-compose.yml"
+                        printf '%s\n' "$HARBOR_PWD" | ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no "$SSH_USER@$DEPLOY_HOST" "docker login '$HARBOR_REGISTRY' -u '$HARBOR_USER' --password-stdin"
+
+                        ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no "$SSH_USER@$DEPLOY_HOST" /bin/sh <<EOF
+set -eu
+cd '$DEPLOY_DIR'
+trap "docker logout '$HARBOR_REGISTRY' >/dev/null 2>&1 || true" EXIT
+printf 'IMAGE_TAG=%s\n' '$IMAGE_TAG' > .env
+docker compose pull
+docker compose up -d
+docker compose ps
+curl --retry 10 --retry-connrefused --retry-delay 2 -fsS http://127.0.0.1:3000/ >/dev/null
+EOF
                     '''
                 }
             }
         }
     }
-    
+
     post {
         always {
+            echo '清理本地 Docker 登录状态和镜像缓存...'
+            sh 'docker logout ${HARBOR_REGISTRY} || true'
+            sh 'docker rmi ${FULL_IMAGE_NAME}:${IMAGE_TAG} || true'
+            sh 'docker rmi ${FULL_IMAGE_NAME}:latest || true'
+
+            echo '清理 Jenkins 工作区...'
             cleanWs()
         }
         success {
-            echo '🎉 博客已经成功发布到 Caddy 啦！'
+            echo "博客已成功发布到 ${DEPLOY_HOST}:3000，镜像标签：${IMAGE_TAG}"
         }
         failure {
             mail to: 'chius.me@outlook.com',
                  subject: "构建失败: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
-                 body: "你的博客流水线跑挂了，快去 Jenkins 看看日志吧！"
+                 body: '博客容器发布流水线失败，请检查 Jenkins 控制台日志。'
         }
     }
 }
