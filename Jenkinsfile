@@ -54,7 +54,7 @@ pipeline {
                         set -eu
 
                         ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no "$SSH_USER@$DEPLOY_HOST" "mkdir -p '$DEPLOY_DIR'"
-                        scp -i "$SSH_KEY" -o StrictHostKeyChecking=no docker-compose.yml "$SSH_USER@$DEPLOY_HOST:$DEPLOY_DIR/docker-compose.yml"
+                        scp -i "$SSH_KEY" -o StrictHostKeyChecking=no docker-compose.yaml "$SSH_USER@$DEPLOY_HOST:$DEPLOY_DIR/docker-compose.yaml"
                         printf '%s\n' "$HARBOR_PWD" | ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no "$SSH_USER@$DEPLOY_HOST" "docker login '$HARBOR_REGISTRY' -u '$HARBOR_USER' --password-stdin"
 
                         ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no "$SSH_USER@$DEPLOY_HOST" /bin/sh <<EOF

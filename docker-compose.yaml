@@ -3,5 +3,6 @@ services:
     image: 10.0.0.134/main/hugo:${IMAGE_TAG:-latest}
     container_name: hugo-blog
     restart: unless-stopped
+    network_mode: bridge
     ports:
       - "3000:80"
