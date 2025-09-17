@@ -60,6 +60,12 @@ url = "https://ko-fi.com/chius"
 [menu]
 
   [[menu.main]]
+  identifier = "hermes"
+  name = "Hermes"
+  url = "/hermes/"
+  weight = 1
+
+  [[menu.main]]
   identifier = "search"
   name = "搜索"
   url = "/search/"
