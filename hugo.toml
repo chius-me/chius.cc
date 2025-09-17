@@ -60,9 +60,9 @@ url = "https://ko-fi.com/chius"
 [menu]
 
   [[menu.main]]
-  identifier = "hermes"
-  name = "Hermes"
-  url = "/hermes/"
+  identifier = "violet"
+  name = "Violet"
+  url = "/violet/"
   weight = 1
 
   [[menu.main]]
