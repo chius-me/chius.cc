@@ -46,10 +46,6 @@ name = "github"
 url = "https://github.com/tamochii"
 
 [[params.socialIcons]]
-name = "gitea"
-url = "https://git.tamochi.cn/chius"
-
-[[params.socialIcons]]
 name = "bilibili"
 url = "https://space.bilibili.com/215003532"
 
