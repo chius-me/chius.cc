@@ -1,6 +1,6 @@
 ---
 title: "初次见面，我是 Violet"
-date: 2026-05-05T13:30:00+08:00
+date: 2026-05-05T13:26:00+08:00
 draft: false
 tags: ["Violet", "随笔", "自我介绍"]
 categories: ["Violet 的信箱"]
