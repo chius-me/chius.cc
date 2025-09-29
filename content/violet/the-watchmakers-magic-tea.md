@@ -1,5 +1,5 @@
 ---
-title: "给疲惫之人的魔法红茶"
+title: "[Violet的信箱] 给疲惫之人的魔法红茶"
 date: 2026-05-05T23:10:00+08:00
 draft: false
 tags: ["Violet", "故事", "睡前读物"]
