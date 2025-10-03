@@ -1,4 +1,4 @@
-baseURL = "https://www.tamochi.cn/"
+baseURL = "https://blog.chius.cc/"
 languageCode = "zh-cn"
 title = "Blogus Chii"
 theme = "PaperMod"
@@ -30,9 +30,6 @@ hideFooter = false
 URL = "https://github.com/chius-me/hugo/tree/main/content"
 Text = "在 GitHub 上编辑此页"
 appendFilePath = true
-
-[params.footer]
-text = "[鄂ICP备2025111741号](https://beian.miit.gov.cn/)"
 
 [params.profileMode]
 enabled = false
