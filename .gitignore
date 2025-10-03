@@ -2,10 +2,3 @@
 public/
 .hugo_build.lock
 
-# CI/CD files (not needed for Cloudflare Pages)
-docker-compose.yaml
-Dockerfile
-.dockerignore
-Jenkinsfile
-docs/
-hugo.log
