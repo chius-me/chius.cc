@@ -27,8 +27,8 @@ hideFooter = false
     favicon = "/favicon.png"
 
 [params.editPost]
-URL = "https://git.tamochi.cn/chius/hugo/src/branch/main/content"
-Text = "在 Gitea 上编辑此页"
+URL = "https://github.com/chius-me/hugo/tree/main/content"
+Text = "在 GitHub 上编辑此页"
 appendFilePath = true
 
 [params.footer]
