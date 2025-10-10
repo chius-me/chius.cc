@@ -1,0 +1,89 @@
+name: Integrate Domestic Blog
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: integrate-${{ forgejo.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-push:
+    # Match the runner label that already exists on this Forgejo instance.
+    runs-on: ubuntu
+    services:
+      docker:
+        image: docker:27-dind
+        env:
+          DOCKER_TLS_CERTDIR: ""
+        options: --privileged --health-cmd "docker info" --health-interval 5s --health-timeout 3s --health-retries 20
+    env:
+      DOCKER_HOST: tcp://docker:2375
+    outputs:
+      image_ref: ${{ steps.image.outputs.image_ref }}
+    steps:
+      # CI stage: checkout -> build Hugo output -> build/push image.
+      - name: Check out repository
+        uses: https://code.forgejo.org/actions/checkout@v4
+
+      - name: Initialize theme submodule
+        run: git submodule update --init --recursive
+
+      - name: Install Hugo and Docker CLI
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends hugo docker.io ca-certificates
+
+      - name: Verify Docker daemon access
+        run: docker info >/dev/null
+
+      - name: Build domestic site output
+        run: |
+          hugo --minify --baseURL "https://${{ vars.BLOG_DOMAIN }}/" --destination public
+          test -f public/index.html
+
+      - name: Derive image tags
+        id: image
+        run: |
+          short_sha="$(printf '%s' '${{ forgejo.sha }}' | cut -c1-12)"
+          repo_path="$(printf '%s' '${{ forgejo.repository }}' | tr '[:upper:]' '[:lower:]')"
+          image_base="${{ vars.REGISTRY_HOST }}/$repo_path"
+          echo "image_ref=$image_base:sha-$short_sha" >> "$FORGEJO_OUTPUT"
+          echo "image_latest=$image_base:latest" >> "$FORGEJO_OUTPUT"
+
+      - name: Log in to Forgejo container registry
+        run: |
+          printf '%s' "$FORGEJO_TOKEN" | docker login "${{ vars.REGISTRY_HOST }}" -u "${{ forgejo.actor }}" --password-stdin
+
+      - name: Build image
+        run: |
+          docker build \
+            -t "${{ steps.image.outputs.image_ref }}" \
+            -t "${{ steps.image.outputs.image_latest }}" \
+            .
+
+      - name: Push immutable image tag
+        run: docker push "${{ steps.image.outputs.image_ref }}"
+
+      - name: Push latest image tag
+        run: docker push "${{ steps.image.outputs.image_latest }}"
+
+  deploy:
+    name: Deploy to Docker host
+    needs:
+      - build-and-push
+    # CD stage: reuse deploy.yml after CI succeeds.
+    uses: ./.forgejo/workflows/deploy.yml
+    with:
+      image_ref: ${{ needs.build-and-push.outputs.image_ref }}
+      deploy_host: ${{ vars.DEPLOY_HOST }}
+      deploy_port: ${{ vars.DEPLOY_PORT }}
+      deploy_user: ${{ vars.DEPLOY_USER }}
+      deploy_host_key: ${{ vars.DEPLOY_HOST_KEY }}
+      deploy_path: ${{ vars.DEPLOY_PATH }}
+      container_name: ${{ vars.CONTAINER_NAME }}
+      service_port: ${{ vars.SERVICE_PORT }}
+    secrets:
+      ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}

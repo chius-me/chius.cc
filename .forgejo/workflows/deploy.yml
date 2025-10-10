@@ -1,0 +1,111 @@
+name: Deploy Domestic Blog
+
+on:
+  workflow_call:
+    inputs:
+      image_ref:
+        description: Immutable image tag to deploy.
+        required: true
+        type: string
+      deploy_host:
+        description: Docker server hostname or IP.
+        required: true
+        type: string
+      deploy_port:
+        description: SSH port for the Docker server.
+        required: true
+        type: string
+      deploy_user:
+        description: SSH user for deployment.
+        required: true
+        type: string
+      deploy_host_key:
+        description: SSH host key in known_hosts format.
+        required: true
+        type: string
+      deploy_path:
+        description: Remote directory holding compose assets.
+        required: true
+        type: string
+      container_name:
+        description: Compose container name.
+        required: true
+        type: string
+      service_port:
+        description: Host port exposed for Caddy to reverse proxy.
+        required: true
+        type: string
+    secrets:
+      ssh_private_key:
+        required: true
+
+concurrency:
+  group: deploy-${{ inputs.deploy_path }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # Match the runner label that already exists on this Forgejo instance.
+    runs-on: ubuntu
+    steps:
+      # CD stage: prepare SSH -> upload compose assets -> restart container -> wait healthy.
+      - name: Check out repository
+        uses: https://code.forgejo.org/actions/checkout@v4
+
+      - name: Install SSH client
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends openssh-client
+
+      - name: Configure SSH access
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "${{ secrets.ssh_private_key }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "${{ inputs.deploy_host_key }}" >> ~/.ssh/known_hosts
+
+      - name: Render remote environment file
+        run: |
+          cat > deploy/runtime.env <<EOF
+          IMAGE_REF=${{ inputs.image_ref }}
+          CONTAINER_NAME=${{ inputs.container_name }}
+          SERVICE_PORT=${{ inputs.service_port }}
+          EOF
+
+      - name: Ensure remote deployment directory exists
+        run: |
+          ssh -p "${{ inputs.deploy_port }}" "${{ inputs.deploy_user }}@${{ inputs.deploy_host }}" \
+            "mkdir -p '${{ inputs.deploy_path }}'"
+
+      - name: Upload compose assets
+        run: |
+          scp -P "${{ inputs.deploy_port }}" \
+            deploy/compose.yaml \
+            deploy/runtime.env \
+            "${{ inputs.deploy_user }}@${{ inputs.deploy_host }}:${{ inputs.deploy_path }}/"
+
+      - name: Pull and restart container
+        run: |
+          ssh -p "${{ inputs.deploy_port }}" "${{ inputs.deploy_user }}@${{ inputs.deploy_host }}" \
+            "mv '${{ inputs.deploy_path }}/runtime.env' '${{ inputs.deploy_path }}/.env' && \
+             docker compose --env-file '${{ inputs.deploy_path }}/.env' -f '${{ inputs.deploy_path }}/compose.yaml' pull && \
+             docker compose --env-file '${{ inputs.deploy_path }}/.env' -f '${{ inputs.deploy_path }}/compose.yaml' up -d"
+
+      - name: Wait for healthy container
+        run: |
+          ssh -p "${{ inputs.deploy_port }}" "${{ inputs.deploy_user }}@${{ inputs.deploy_host }}" '
+            set -eu
+            for attempt in $(seq 1 30); do
+              health_state=$(docker inspect -f "{{if .State.Health}}{{.State.Health.Status}}{{else}}no-healthcheck{{end}}" "${{ inputs.container_name }}")
+              if [ "$health_state" = healthy ]; then
+                exit 0
+              fi
+              if [ "$health_state" = unhealthy ]; then
+                docker logs "${{ inputs.container_name }}"
+                exit 1
+              fi
+              sleep 2
+            done
+            docker logs "${{ inputs.container_name }}"
+            exit 1
+          '
