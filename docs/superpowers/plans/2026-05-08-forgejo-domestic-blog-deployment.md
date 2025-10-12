@@ -56,7 +56,7 @@ services:
 ```
 
 ```dotenv
-IMAGE_REF=registry.example.com/owner/hugo:sha-0123456789ab
+IMAGE_REF=10.0.0.130:3000/chius/hugo:sha-0123456789ab
 CONTAINER_NAME=blog-tamochi
 SERVICE_PORT=8080
 ```
