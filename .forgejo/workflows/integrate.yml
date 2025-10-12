@@ -56,7 +56,7 @@ jobs:
 
       - name: Log in to Forgejo container registry
         run: |
-          printf '%s' "$FORGEJO_TOKEN" | docker login "${{ vars.REGISTRY_HOST }}" -u "${{ forgejo.actor }}" --password-stdin
+          printf '%s' "${{ secrets.REGISTRY_TOKEN }}" | docker login "${{ vars.REGISTRY_HOST }}" -u "${{ vars.REGISTRY_USERNAME }}" --password-stdin
 
       - name: Build image
         run: |

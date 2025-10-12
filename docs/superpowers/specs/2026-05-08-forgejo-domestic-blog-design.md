@@ -58,6 +58,7 @@ Use repository or owner variables for non-sensitive values:
 - `BLOG_DOMAIN`
 - `HUGO_VERSION`
 - `REGISTRY_HOST`
+- `REGISTRY_USERNAME`
 - `DEPLOY_HOST`
 - `DEPLOY_PORT`
 - `DEPLOY_USER`
@@ -71,10 +72,13 @@ Use repository or owner variables for non-sensitive values:
 Only keep truly sensitive data in secrets:
 
 - `SSH_PRIVATE_KEY`
+- `REGISTRY_TOKEN`
 
 `DEPLOY_HOST_KEY` should be stored as a variable in full `known_hosts` format so the deployment does not trust a freshly scanned host key during the same run.
 
 The Docker server should be manually logged into the Forgejo registry once so the remote host does not need a registry password secret in CI.
+
+`REGISTRY_TOKEN` should be a personal access token for the Forgejo account named by `REGISTRY_USERNAME`, created with package access and broad repository visibility. The automatic `FORGEJO_TOKEN` is not sufficient for pushing container packages.
 
 The Forgejo runner that executes `integrate.yml` must be configured to share Docker access with the job container, for example via `container.docker_host: automount` when this is an internally trusted runner.
 

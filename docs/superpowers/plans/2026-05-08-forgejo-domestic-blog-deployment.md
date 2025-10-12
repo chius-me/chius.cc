@@ -104,7 +104,7 @@ jobs:
           repo_path="$(printf '%s' '${{ forgejo.repository }}' | tr '[:upper:]' '[:lower:]')"
           image_base="${{ vars.REGISTRY_HOST }}/$repo_path"
           echo "image_ref=$image_base:sha-$short_sha" >> "$FORGEJO_OUTPUT"
-      - run: printf '%s' "$FORGEJO_TOKEN" | docker login "${{ vars.REGISTRY_HOST }}" -u "${{ forgejo.actor }}" --password-stdin
+      - run: printf '%s' "${{ secrets.REGISTRY_TOKEN }}" | docker login "${{ vars.REGISTRY_HOST }}" -u "${{ vars.REGISTRY_USERNAME }}" --password-stdin
       - run: docker build -t "${{ steps.image.outputs.image_ref }}" -t "${{ vars.REGISTRY_HOST }}/$(printf '%s' '${{ forgejo.repository }}' | tr '[:upper:]' '[:lower:]'):latest" .
       - run: docker push "${{ steps.image.outputs.image_ref }}"
       - run: docker push "${{ vars.REGISTRY_HOST }}/$(printf '%s' '${{ forgejo.repository }}' | tr '[:upper:]' '[:lower:]'):latest"
