@@ -13,14 +13,6 @@ jobs:
   build-and-push:
     # Match the runner label that already exists on this Forgejo instance.
     runs-on: ubuntu
-    services:
-      docker:
-        image: docker:27-dind
-        env:
-          DOCKER_TLS_CERTDIR: ""
-        options: --privileged --health-cmd "docker info" --health-interval 5s --health-timeout 3s --health-retries 20
-    env:
-      DOCKER_HOST: tcp://docker:2375
     outputs:
       image_ref: ${{ steps.image.outputs.image_ref }}
     steps:
@@ -37,7 +29,9 @@ jobs:
           apt-get install -y --no-install-recommends hugo docker.io ca-certificates
 
       - name: Verify Docker daemon access
-        run: docker info >/dev/null
+        run: |
+          docker info >/dev/null
+          docker version
 
       - name: Build domestic site output
         run: |

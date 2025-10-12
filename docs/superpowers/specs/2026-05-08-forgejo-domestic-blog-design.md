@@ -26,7 +26,7 @@ Add a second deployment path for this Hugo blog that is driven by Forgejo Action
 2. The workflow checks out the repository and initializes submodules.
 3. Hugo builds the site with a runtime override: `--baseURL https://blog.tamochi.cn/`.
 4. The workflow validates that `public/index.html` exists.
-5. The workflow targets an existing Forgejo runner label such as `ubuntu` and uses a `docker:dind` service so Docker build and push do not depend on a host socket mount.
+5. The workflow targets an existing Forgejo runner label such as `ubuntu` and expects the Forgejo runner to expose a usable Docker daemon into the job container.
 6. A Docker image is built from `nginx`, copying the generated `public/` directory into the container.
 7. The image is tagged as both `latest` and `sha-<short-commit>` and pushed to the Forgejo Container Registry.
 
@@ -73,6 +73,8 @@ Only keep truly sensitive data in secrets:
 `DEPLOY_HOST_KEY` should be stored as a variable in full `known_hosts` format so the deployment does not trust a freshly scanned host key during the same run.
 
 The Docker server should be manually logged into the Forgejo registry once so the remote host does not need a registry password secret in CI.
+
+The Forgejo runner that executes `integrate.yml` must be configured to share Docker access with the job container, for example via `container.docker_host: automount` when this is an internally trusted runner.
 
 ## Rollback Strategy
 

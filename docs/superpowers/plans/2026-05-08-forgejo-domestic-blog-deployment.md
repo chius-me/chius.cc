@@ -88,21 +88,13 @@ concurrency:
 jobs:
   build-and-push:
     runs-on: ubuntu
-    services:
-      docker:
-        image: docker:27-dind
-        env:
-          DOCKER_TLS_CERTDIR: ""
-        options: --privileged --health-cmd "docker info" --health-interval 5s --health-timeout 3s --health-retries 20
-    env:
-      DOCKER_HOST: tcp://docker:2375
     outputs:
       image_ref: ${{ steps.image.outputs.image_ref }}
     steps:
       - uses: https://code.forgejo.org/actions/checkout@v4
       - run: git submodule update --init --recursive
       - run: apt-get update && apt-get install -y --no-install-recommends hugo docker.io ca-certificates
-      - run: docker info >/dev/null
+      - run: docker info >/dev/null && docker version
       - run: hugo --minify --baseURL "https://${{ vars.BLOG_DOMAIN }}/" --destination public
       - run: test -f public/index.html
       - id: image
