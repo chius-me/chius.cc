@@ -17,7 +17,7 @@ on:
         type: string
       deploy_user:
         description: SSH user for deployment.
-        required: true
+        required: true 
         type: string
       deploy_host_key:
         description: SSH host key in known_hosts format.
