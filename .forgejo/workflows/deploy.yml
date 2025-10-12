@@ -50,7 +50,7 @@ jobs:
     steps:
       # CD stage: prepare SSH -> upload compose assets -> restart container -> wait healthy.
       - name: Check out repository
-        uses: https://code.forgejo.org/actions/checkout@v4
+        uses: actions/checkout@v4
 
       - name: Install SSH client
         run: |

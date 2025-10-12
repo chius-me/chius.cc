@@ -24,11 +24,12 @@ Add a second deployment path for this Hugo blog that is driven by Forgejo Action
 
 1. A push to `main` triggers `.forgejo/workflows/integrate.yml`.
 2. The workflow checks out the repository and initializes submodules.
-3. Hugo builds the site with a runtime override: `--baseURL https://blog.tamochi.cn/`.
-4. The workflow validates that `public/index.html` exists.
-5. The workflow targets an existing Forgejo runner label such as `ubuntu` and expects the Forgejo runner to expose a usable Docker daemon into the job container.
-6. A Docker image is built from `nginx`, copying the generated `public/` directory into the container.
-7. The image is tagged as both `latest` and `sha-<short-commit>` and pushed to the Forgejo Container Registry.
+3. The workflow installs a pinned Hugo Extended release that is new enough for the current `PaperMod` theme.
+4. Hugo builds the site with a runtime override: `--baseURL https://blog.tamochi.cn/`.
+5. The workflow validates that `public/index.html` exists.
+6. The workflow targets an existing Forgejo runner label such as `ubuntu` and expects the Forgejo runner to expose a usable Docker daemon into the job container.
+7. A Docker image is built from `nginx`, copying the generated `public/` directory into the container.
+8. The image is tagged as both `latest` and `sha-<short-commit>` and pushed to the Forgejo Container Registry.
 
 ### Deploy Path
 
@@ -55,6 +56,7 @@ Add a second deployment path for this Hugo blog that is driven by Forgejo Action
 Use repository or owner variables for non-sensitive values:
 
 - `BLOG_DOMAIN`
+- `HUGO_VERSION`
 - `REGISTRY_HOST`
 - `DEPLOY_HOST`
 - `DEPLOY_PORT`

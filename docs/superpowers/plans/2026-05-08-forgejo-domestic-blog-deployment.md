@@ -91,9 +91,10 @@ jobs:
     outputs:
       image_ref: ${{ steps.image.outputs.image_ref }}
     steps:
-      - uses: https://code.forgejo.org/actions/checkout@v4
+      - uses: actions/checkout@v4
       - run: git submodule update --init --recursive
-      - run: apt-get update && apt-get install -y --no-install-recommends hugo docker.io ca-certificates
+      - run: apt-get update && apt-get install -y --no-install-recommends curl docker.io ca-certificates
+      - run: curl -fsSL -o /tmp/hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${{ vars.HUGO_VERSION }}/hugo_extended_${{ vars.HUGO_VERSION }}_linux-amd64.tar.gz" && tar -xzf /tmp/hugo.tar.gz -C /tmp && install -m 0755 /tmp/hugo /usr/local/bin/hugo && hugo version
       - run: docker info >/dev/null && docker version
       - run: hugo --minify --baseURL "https://${{ vars.BLOG_DOMAIN }}/" --destination public
       - run: test -f public/index.html
@@ -179,7 +180,7 @@ jobs:
   deploy:
     runs-on: ubuntu
     steps:
-      - uses: https://code.forgejo.org/actions/checkout@v4
+      - uses: actions/checkout@v4
       - run: apt-get update && apt-get install -y --no-install-recommends openssh-client
       - run: |
           install -d -m 700 ~/.ssh
