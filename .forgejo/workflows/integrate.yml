@@ -25,6 +25,7 @@ jobs:
 
       - name: Install Docker CLI and curl
         run: |
+          sed -i 's|http://archive.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g; s|http://security.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources
           apt-get update
           apt-get install -y --no-install-recommends curl docker.io ca-certificates
 
