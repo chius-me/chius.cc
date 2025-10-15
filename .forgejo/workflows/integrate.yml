@@ -87,5 +87,4 @@ jobs:
       deploy_path: ${{ vars.DEPLOY_PATH }}
       container_name: ${{ vars.CONTAINER_NAME }}
       service_port: ${{ vars.SERVICE_PORT }}
-    secrets:
-      HUGO_DEPLOY_KEY: ${{ secrets.HUGO_DEPLOY_KEY }}
+      ssh_private_key: ${{ secrets.HUGO_DEPLOY_KEY }}

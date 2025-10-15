@@ -35,9 +35,10 @@ on:
         description: Host port exposed for Caddy to reverse proxy.
         required: true
         type: string
-    secrets:
       ssh_private_key:
+        description: SSH private key for deployment.
         required: true
+        type: string
 
 concurrency:
   group: deploy-${{ inputs.deploy_path }}
@@ -54,13 +55,14 @@ jobs:
 
       - name: Install SSH client
         run: |
+          sed -i 's|http://archive.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g; s|http://security.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources
           apt-get update
           apt-get install -y --no-install-recommends openssh-client
 
       - name: Configure SSH access
         run: |
           install -d -m 700 ~/.ssh
-          printf '%s\n' "${{ secrets.ssh_private_key }}" > ~/.ssh/id_ed25519
+          printf '%s\n' "${{ inputs.ssh_private_key }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           printf '%s\n' "${{ inputs.deploy_host_key }}" >> ~/.ssh/known_hosts
 
