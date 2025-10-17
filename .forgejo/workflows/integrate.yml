@@ -76,15 +76,67 @@ jobs:
     name: Deploy to Docker host
     needs:
       - build-and-push
-    # CD stage: reuse deploy.yml after CI succeeds.
-    uses: ./.forgejo/workflows/deploy.yml
-    with:
-      image_ref: ${{ needs.build-and-push.outputs.image_ref }}
-      deploy_host: ${{ vars.DEPLOY_HOST }}
-      deploy_port: ${{ vars.DEPLOY_PORT }}
-      deploy_user: ${{ vars.DEPLOY_USER }}
-      deploy_host_key: ${{ vars.DEPLOY_HOST_KEY }}
-      deploy_path: ${{ vars.DEPLOY_PATH }}
-      container_name: ${{ vars.CONTAINER_NAME }}
-      service_port: ${{ vars.SERVICE_PORT }}
-      ssh_private_key: ${{ secrets.HUGO_DEPLOY_KEY }}
+    runs-on: ubuntu
+    steps:
+      # CD stage: prepare SSH -> upload compose assets -> restart container -> wait healthy.
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install SSH client
+        run: |
+          sed -i 's|http://archive.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g; s|http://security.ubuntu.com/ubuntu|https://mirrors.tuna.tsinghua.edu.cn/ubuntu|g' /etc/apt/sources.list.d/ubuntu.sources
+          apt-get update
+          apt-get install -y --no-install-recommends openssh-client
+
+      - name: Configure SSH access
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "${{ secrets.HUGO_DEPLOY_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "${{ vars.DEPLOY_HOST_KEY }}" >> ~/.ssh/known_hosts
+
+      - name: Render remote environment file
+        run: |
+          cat > deploy/runtime.env <<EOF
+          IMAGE_REF=${{ needs.build-and-push.outputs.image_ref }}
+          CONTAINER_NAME=${{ vars.CONTAINER_NAME }}
+          SERVICE_PORT=${{ vars.SERVICE_PORT }}
+          EOF
+
+      - name: Ensure remote deployment directory exists
+        run: |
+          ssh -p "${{ vars.DEPLOY_PORT }}" "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}" \
+            "mkdir -p '${{ vars.DEPLOY_PATH }}'"
+
+      - name: Upload compose assets
+        run: |
+          scp -P "${{ vars.DEPLOY_PORT }}" \
+            deploy/compose.yaml \
+            deploy/runtime.env \
+            "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}:${{ vars.DEPLOY_PATH }}/"
+
+      - name: Pull and restart container
+        run: |
+          ssh -p "${{ vars.DEPLOY_PORT }}" "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}" \
+            "mv '${{ vars.DEPLOY_PATH }}/runtime.env' '${{ vars.DEPLOY_PATH }}/.env' && \
+             docker compose --env-file '${{ vars.DEPLOY_PATH }}/.env' -f '${{ vars.DEPLOY_PATH }}/compose.yaml' pull && \
+             docker compose --env-file '${{ vars.DEPLOY_PATH }}/.env' -f '${{ vars.DEPLOY_PATH }}/compose.yaml' up -d"
+
+      - name: Wait for healthy container
+        run: |
+          ssh -p "${{ vars.DEPLOY_PORT }}" "${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}" '
+            set -eu
+            for attempt in $(seq 1 30); do
+              health_state=$(docker inspect -f "{{if .State.Health}}{{.State.Health.Status}}{{else}}no-healthcheck{{end}}" "${{ vars.CONTAINER_NAME }}")
+              if [ "$health_state" = healthy ]; then
+                exit 0
+              fi
+              if [ "$health_state" = unhealthy ]; then
+                docker logs "${{ vars.CONTAINER_NAME }}"
+                exit 1
+              fi
+              sleep 2
+            done
+            docker logs "${{ vars.CONTAINER_NAME }}"
+            exit 1
+          '
