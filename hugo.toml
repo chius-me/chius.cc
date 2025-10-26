@@ -36,19 +36,11 @@ enabled = false
 
 [params.homeInfoParams]
 Title = "Chius"
-Content = "🥰欢迎来到我的个人博客"
+Content = "🥰 欢迎来到我的个人博客"
 
 [[params.socialIcons]]
 name = "github"
 url = "https://github.com/chius-me"
-
-[[params.socialIcons]]
-name = "gotosocial"
-url = "https://social.chius.cc"
-
-[[params.socialIcons]]
-name = "bilibili"
-url = "https://space.bilibili.com/215003532"
 
 [[params.socialIcons]]
 name = "kofi"
