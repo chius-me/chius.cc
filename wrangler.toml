@@ -4,4 +4,4 @@ compatibility_date = "2024-12-18"
 
 [assets]
 directory = "public"
-not_found_handling = "404.html"
+not_found_handling = "404-page"
