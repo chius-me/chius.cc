@@ -1,7 +1,0 @@
-services:
-  blog:
-    image: ${IMAGE_REF}
-    container_name: ${CONTAINER_NAME}
-    restart: unless-stopped
-    ports:
-      - "${SERVICE_PORT}:80"
