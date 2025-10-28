@@ -33,3 +33,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           command: deploy
+
+      - name: Add custom domain
+        run: npx wrangler domains add blog.chius.cc || echo "Domain may already exist, skipping"
