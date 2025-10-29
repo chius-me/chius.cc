@@ -1,13 +1,67 @@
 baseURL = "https://blog.chius.cc/"
-languageCode = "zh-cn"
 title = "Blogus Chii"
 theme = "PaperMod"
-defaultContentLanguage = "zh" 
+defaultContentLanguage = "zh"
 hasCJKLanguage = true
+
+[languages.zh]
+  languageCode = "zh-cn"
+  contentDir = "content"
+  [languages.zh.params]
+    description = "Chius 的博客"
+    [languages.zh.params.homeInfoParams]
+      Title = "Chius"
+      Content = "🥰 欢迎来到我的个人博客"
+  [[languages.zh.menu.main]]
+    name = "搜索"
+    url = "/search/"
+    weight = 5
+  [[languages.zh.menu.main]]
+    identifier = "posts"
+    name = "文章"
+    url = "/posts/"
+    weight = 10
+  [[languages.zh.menu.main]]
+    identifier = "archives"
+    name = "归档"
+    url = "/archives/"
+    weight = 20
+  [[languages.zh.menu.main]]
+    identifier = "tags"
+    name = "标签"
+    url = "/tags/"
+    weight = 30
+
+[languages.en]
+  languageCode = "en"
+  contentDir = "content/en"
+  [languages.en.params]
+    description = "Chius's Blog"
+    [languages.en.params.homeInfoParams]
+      Title = "Chius"
+      Content = "🥰 Welcome to my blog"
+  [[languages.en.menu.main]]
+    name = "Search"
+    url = "/en/search/"
+    weight = 5
+  [[languages.en.menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/en/posts/"
+    weight = 10
+  [[languages.en.menu.main]]
+    identifier = "archives"
+    name = "Archives"
+    url = "/en/archives/"
+    weight = 20
+  [[languages.en.menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/en/tags/"
+    weight = 30
 
 [params]
 env = "production"
-description = "Chius 的博客"
 author = "Chius"
 defaultTheme = "light"
 ShowToc = true
@@ -28,43 +82,6 @@ hideFooter = false
 
 [params.profileMode]
 enabled = false
-
-[params.homeInfoParams]
-Title = "Chius"
-Content = "🥰 欢迎来到我的个人博客"
-
-
-
-[menu]
-
-  [[menu.main]]
-  identifier = "violet"
-  name = "Violet"
-  url = "/violet/"
-  weight = 1
-
-  [[menu.main]]
-  name = "搜索"
-  url = "/search/"
-  weight = 5
-
-  [[menu.main]]
-  identifier = "posts"
-  name = "文章"
-  url = "/posts/"
-  weight = 10
-
-  [[menu.main]]
-  identifier = "archives"
-  name = "归档"
-  url = "/archives/"
-  weight = 20
-
-  [[menu.main]]
-  identifier = "tags"
-  name = "标签"
-  url = "/tags/"
-  weight = 30
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]

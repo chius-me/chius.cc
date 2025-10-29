@@ -1,0 +1,11 @@
+- id: prev
+  translation: "Previous"
+
+- id: next
+  translation: "Next"
+
+- id: readTime
+  translation: "reading time"
+
+- id: words
+  translation: "words"

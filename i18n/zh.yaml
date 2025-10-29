@@ -1,0 +1,11 @@
+- id: prev
+  translation: "上一篇"
+
+- id: next
+  translation: "下一篇"
+
+- id: readTime
+  translation: "阅读时间"
+
+- id: words
+  translation: "字"
