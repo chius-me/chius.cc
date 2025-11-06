@@ -18,7 +18,8 @@ mainSections = ["posts"]
   showScrollToTop = true
 
 [homepage]
-  layout = "profile"
+  layout = "background"
+  homepageImage = "img/background.svg"
   showRecent = true
   showRecentItems = 5
   showMoreLink = false
