@@ -1,0 +1,16 @@
+disabled = false
+locale = "zh-cn"
+label = "中文"
+weight = 1
+title = "Blogus Chii"
+
+[params]
+  displayName = "中文"
+  isoCode = "zh-cn"
+  rtl = false
+  dateFormat = "2006年1月2日"
+  description = "Chius 的博客"
+
+[params.author]
+  name = "Chius"
+  headline = "🥰 欢迎来到我的个人博客"

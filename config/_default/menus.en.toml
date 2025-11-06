@@ -1,0 +1,19 @@
+[[main]]
+  name = "Search"
+  pageRef = "search"
+  weight = 5
+
+[[main]]
+  name = "Posts"
+  pageRef = "posts"
+  weight = 10
+
+[[main]]
+  name = "Archives"
+  pageRef = "archives"
+  weight = 20
+
+[[main]]
+  name = "Tags"
+  pageRef = "tags"
+  weight = 30
