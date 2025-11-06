@@ -62,6 +62,7 @@ hasCJKLanguage = true
 
 [params]
 env = "production"
+mainSections = ["posts"]
 author = "Chius"
 defaultTheme = "light"
 ShowToc = true
