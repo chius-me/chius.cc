@@ -1,0 +1,216 @@
+{{ define "main" }}
+<article class="max-w-prose">
+  {{ if .Title }}
+  <header class="mb-16">
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      {{ .Title }}
+    </h1>
+    {{ if .Content }}
+    <div class="mt-8 text-lg text-neutral-600 dark:text-neutral-400 page-content">
+      {{ .Content }}
+    </div>
+    {{ end }}
+  </header>
+  {{ end }}
+
+  <div id="memos-config" style="display: none;" 
+       data-server-url="{{ .Site.Params.memos.serverURL | default "" }}"
+       data-access-token="{{ .Site.Params.memos.accessToken | default "" }}"
+       data-user-id="{{ .Site.Params.memos.userID | default "" }}">
+  </div>
+
+  <div id="loading" class="text-center py-8">
+    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-neutral-900 dark:border-neutral-100"></div>
+    <p class="mt-2 text-neutral-600 dark:text-neutral-400">加载中...</p>
+  </div>
+
+  <div id="error" class="hidden bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-6">
+    <p class="text-red-800 dark:text-red-200">
+      <span class="font-medium">加载失败：</span>
+      <span id="error-message"></span>
+    </p>
+    <button id="retry-btn" class="mt-3 px-3 py-1 bg-red-100 hover:bg-red-200 dark:bg-red-800 dark:hover:bg-red-700 text-red-800 dark:text-red-200 rounded text-sm transition-colors duration-200">
+      重试
+    </button>
+  </div>
+
+  <div id="memos-timeline" class="space-y-6 mt-8"></div>
+
+  <div id="load-more-container" class="hidden text-center mt-8">
+    <button id="load-more-btn" 
+            class="px-6 py-2 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 
+                   text-neutral-900 dark:text-neutral-100 rounded-lg transition-colors duration-200">
+      加载更多
+    </button>
+  </div>
+
+  <div id="no-data" class="hidden text-center py-12">
+    <p class="text-neutral-500 dark:text-neutral-400">暂无记录</p>
+  </div>
+</article>
+
+<style>
+.memo-item {
+  position: relative;
+  padding-left: 0;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+.memo-item:last-child { border-bottom: none; }
+.dark .memo-item { border-bottom-color: #374151; }
+.memo-time {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+}
+.memo-content { line-height: 1.7; color: #374151; }
+.dark .memo-content { color: #d1d5db; }
+.memo-content p { margin-bottom: 1rem; }
+.memo-content p:last-child { margin-bottom: 0; }
+.memo-content a { color: rgba(var(--color-primary-700), 1); text-decoration: underline; }
+.memo-content blockquote {
+  border-left: 3px solid #e5e7eb;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: #6b7280;
+}
+.dark .memo-content blockquote { border-left-color: #4b5563; color: #9ca3af; }
+.memo-content code {
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+.dark .memo-content code { background-color: #374151; }
+.memo-content pre {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+.dark .memo-content pre { background-color: #1e293b; border-color: #475569; }
+</style>
+
+<script>
+class MemosClient {
+  constructor(serverURL, accessToken, userID) {
+    this.serverURL = serverURL.replace(/\/$/, '');
+    this.accessToken = accessToken;
+    this.userID = userID;
+    this.pageSize = 20;
+    this.currentPage = 0;
+    this.hasMore = true;
+  }
+
+  async fetchMemos(offset, limit) {
+    offset = offset || 0;
+    limit = limit || this.pageSize;
+    var apiUrl = this.serverURL + '/api/v1/memos';
+    var params = [];
+    params.push('limit=' + limit);
+    params.push('offset=' + offset);
+    if (this.userID) params.push('creatorId=' + this.userID);
+    apiUrl += '?' + params.join('&');
+
+    var headers = { 'Content-Type': 'application/json' };
+    if (this.accessToken) headers['Authorization'] = 'Bearer ' + this.accessToken;
+
+    var resp = await fetch(apiUrl, { method: 'GET', headers: headers });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status + ': ' + resp.statusText);
+    var data = await resp.json();
+    var memos = data.memos || data.data || data;
+    if (!Array.isArray(memos)) memos = [];
+    return { memos: memos, hasMore: memos.length === limit };
+  }
+
+  formatContent(content) {
+    if (!content) return '';
+    return content
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br>');
+  }
+
+  formatDate(dateString) {
+    try {
+      var d = new Date(dateString);
+      var y = d.getFullYear();
+      var m = String(d.getMonth() + 1).padStart(2, '0');
+      var day = String(d.getDate()).padStart(2, '0');
+      var h = String(d.getHours()).padStart(2, '0');
+      var min = String(d.getMinutes()).padStart(2, '0');
+      return y + '-' + m + '-' + day + ' ' + h + ':' + min;
+    } catch(e) { return dateString; }
+  }
+
+  renderMemo(memo) {
+    var el = document.createElement('div');
+    el.className = 'memo-item';
+    var time = memo.createTime || memo.createdTs || memo.created_at || memo.updatedTs || '';
+    el.innerHTML = '<div class="memo-time">' + this.formatDate(time) + '</div>' +
+      '<div class="memo-content"><p>' + this.formatContent(memo.content || memo.text || '') + '</p></div>';
+    return el;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var configEl = document.getElementById('memos-config');
+  var timelineEl = document.getElementById('memos-timeline');
+  var loadingEl = document.getElementById('loading');
+  var errorEl = document.getElementById('error');
+  var errorMsgEl = document.getElementById('error-message');
+  var loadMoreContainer = document.getElementById('load-more-container');
+  var loadMoreBtn = document.getElementById('load-more-btn');
+  var noDataEl = document.getElementById('no-data');
+
+  var serverURL = configEl.dataset.serverUrl;
+  var accessToken = configEl.dataset.accessToken;
+  var userID = configEl.dataset.userId;
+
+  if (!serverURL) {
+    loadingEl.style.display = 'none';
+    errorEl.classList.remove('hidden');
+    errorMsgEl.textContent = '未配置 Memos 服务器地址';
+    return;
+  }
+
+  var client = new MemosClient(serverURL, accessToken, userID);
+  var currentOffset = 0;
+
+  function showError(msg) {
+    loadingEl.style.display = 'none';
+    errorEl.classList.remove('hidden');
+    errorMsgEl.textContent = msg;
+  }
+
+  async function loadMemos(append) {
+    try {
+      if (!append) { loadingEl.style.display = 'block'; errorEl.classList.add('hidden'); }
+      var result = await client.fetchMemos(currentOffset, client.pageSize);
+      if (!append) loadingEl.style.display = 'none';
+      if (result.memos.length === 0 && currentOffset === 0) { noDataEl.classList.remove('hidden'); return; }
+      result.memos.forEach(function(m) { timelineEl.appendChild(client.renderMemo(m)); });
+      currentOffset += result.memos.length;
+      if (result.hasMore && result.memos.length > 0) loadMoreContainer.classList.remove('hidden');
+      else loadMoreContainer.classList.add('hidden');
+    } catch(e) { showError(e.message); }
+  }
+
+  loadMoreBtn.addEventListener('click', function() { loadMemos(true); });
+  document.getElementById('retry-btn').addEventListener('click', function() {
+    currentOffset = 0; timelineEl.innerHTML = ''; loadMemos(false);
+  });
+
+  loadMemos(false);
+});
+</script>
+{{ end }}
