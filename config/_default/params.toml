@@ -47,3 +47,6 @@ mainSections = ["posts"]
 
 [term]
   groupByYear = false
+
+[memos]
+  serverURL = "https://memos.chius.cc"
