@@ -4,11 +4,12 @@ autoSwitchAppearance = true
 
 enableSearch = true
 enableCodeCopy = true
+enableStructuredBreadcrumbs = true
 
 mainSections = ["posts"]
 
 [header]
-  layout = "basic"
+  layout = "fixed"
 
 [footer]
   showMenu = true
@@ -23,30 +24,42 @@ mainSections = ["posts"]
   showRecent = true
   showRecentItems = 5
   showMoreLink = false
+  cardView = true
+  layoutBackgroundBlur = true
 
 [article]
   showDate = true
+  showDateOnlyInArticle = false
   showViews = false
   showLikes = false
   showAuthor = true
-  showBreadcrumbs = false
+  showBreadcrumbs = true
   showReadingTime = true
   showTableOfContents = true
   showWordCount = true
   showPagination = true
   showTaxonomies = true
   showTags = true
+  heroStyle = "background"
+  layoutBackgroundBlur = true
+  layoutBackgroundHeaderSpace = true
+  showHeadingAnchors = true
+  showRelatedContent = true
+  relatedContentLimit = 5
 
 [list]
   showBreadcrumbs = false
   showSummary = false
   groupByYear = true
+  cardView = true
+  showTableOfContents = true
 
 [taxonomy]
   showTermCount = true
 
 [term]
   groupByYear = false
+  cardView = true
 
 [memos]
   serverURL = "https://memos.chius.cc"
