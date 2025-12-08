@@ -8,6 +8,9 @@ enableStructuredBreadcrumbs = true
 
 mainSections = ["posts"]
 
+defaultBackgroundImage = "img/background.svg"
+defaultFeaturedImage = "img/featured.svg"
+
 [header]
   layout = "fixed"
 
