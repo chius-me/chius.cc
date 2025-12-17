@@ -43,6 +43,7 @@ defaultFeaturedImage = "img/featured.svg"
   showPagination = true
   showTaxonomies = true
   showTags = true
+  showHero = true
   heroStyle = "background"
   layoutBackgroundBlur = true
   layoutBackgroundHeaderSpace = true
