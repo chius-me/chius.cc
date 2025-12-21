@@ -1,15 +1,4 @@
 {{ define "main" }}
-{{ .Scratch.Set "scope" "single" }}
-{{ if .Params.showHero | default (site.Params.article.showHero | default false) }}
-  {{ $heroStyle := .Params.heroStyle | default site.Params.article.heroStyle }}
-  {{ $heroStyle := print "hero/" $heroStyle ".html" }}
-  {{ if templates.Exists (printf "partials/%s" $heroStyle) }}
-    {{ partial $heroStyle . }}
-  {{ else }}
-    {{ partial "hero/basic.html" . }}
-  {{ end }}
-{{ end }}
-
 <article class="max-w-prose">
   {{ if .Title }}
   <header class="mb-16">
