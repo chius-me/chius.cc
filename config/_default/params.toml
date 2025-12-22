@@ -52,6 +52,10 @@ defaultFeaturedImage = "img/featured.svg"
   relatedContentLimit = 5
 
 [list]
+  showHero = true
+  heroStyle = "background"
+  layoutBackgroundBlur = true
+  layoutBackgroundHeaderSpace = false
   showBreadcrumbs = false
   showSummary = false
   groupByYear = true
@@ -59,9 +63,17 @@ defaultFeaturedImage = "img/featured.svg"
   showTableOfContents = true
 
 [taxonomy]
+  showHero = true
+  heroStyle = "background"
+  layoutBackgroundBlur = true
+  layoutBackgroundHeaderSpace = false
   showTermCount = true
 
 [term]
+  showHero = true
+  heroStyle = "background"
+  layoutBackgroundBlur = true
+  layoutBackgroundHeaderSpace = false
   groupByYear = false
   cardView = true
 
