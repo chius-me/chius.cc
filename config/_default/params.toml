@@ -8,8 +8,6 @@ enableStructuredBreadcrumbs = true
 
 mainSections = ["posts"]
 
-Logo = "img/logo.png"
-
 defaultBackgroundImage = "img/background.svg"
 defaultFeaturedImage = "img/featured.svg"
 
