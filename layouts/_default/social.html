@@ -1,0 +1,200 @@
+{{ define "main" }}
+<article class="max-w-prose">
+  {{ if .Title }}
+  <header class="mb-16">
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      {{ .Title }}
+    </h1>
+    {{ if .Content }}
+    <div class="mt-8 text-lg text-neutral-600 dark:text-neutral-400 page-content">
+      {{ .Content }}
+    </div>
+    {{ end }}
+  </header>
+  {{ end }}
+
+  <div id="social-config" style="display: none;"
+       data-rss-url="{{ .Site.Params.gotosocial.rssURL | default "" }}">
+  </div>
+
+  <div id="loading" class="text-center py-8">
+    <p class="text-neutral-500 dark:text-neutral-400">加载中...</p>
+  </div>
+
+  <div id="error" class="hidden bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-6">
+    <p class="text-red-800 dark:text-red-200">
+      <span class="font-medium">加载失败：</span>
+      <span id="error-message"></span>
+    </p>
+    <button id="retry-btn" class="mt-3 px-3 py-1 bg-red-100 hover:bg-red-200 dark:bg-red-800 dark:hover:bg-red-700 text-red-800 dark:text-red-200 rounded text-sm transition-colors duration-200">
+      重试
+    </button>
+  </div>
+
+  <div id="social-timeline" class="space-y-6 mt-8"></div>
+
+  <div id="no-data" class="hidden text-center py-12">
+    <p class="text-neutral-500 dark:text-neutral-400">暂无嘟文</p>
+  </div>
+</article>
+
+<style>
+.social-item {
+  position: relative;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+.social-item:last-child { border-bottom: none; }
+.dark .social-item { border-bottom-color: #374151; }
+.social-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+.social-meta a {
+  color: #6b7280;
+  text-decoration: none;
+}
+.social-meta a:hover { text-decoration: underline; }
+.social-content {
+  line-height: 1.7;
+  color: #374151;
+  word-break: break-word;
+}
+.dark .social-content { color: #d1d5db; }
+.social-content p { margin: 0 0 0.75rem 0; }
+.social-content p:last-child { margin-bottom: 0; }
+.social-content a {
+  color: rgba(var(--color-primary-600), 1);
+  text-decoration: underline;
+}
+.social-content .hashtag { color: rgba(var(--color-primary-500), 1); }
+.social-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.social-attachments img {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+.social-link {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 0.5rem;
+}
+.social-link a { color: #9ca3af; text-decoration: none; }
+.social-link a:hover { text-decoration: underline; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var configEl = document.getElementById('social-config');
+  var timelineEl = document.getElementById('social-timeline');
+  var loadingEl = document.getElementById('loading');
+  var errorEl = document.getElementById('error');
+  var errorMsgEl = document.getElementById('error-message');
+  var noDataEl = document.getElementById('no-data');
+  var rssUrl = configEl.dataset.rssUrl;
+
+  if (!rssUrl) {
+    showError('未配置 GoToSocial RSS 地址');
+    return;
+  }
+
+  function showError(msg) {
+    loadingEl.style.display = 'none';
+    errorEl.classList.remove('hidden');
+    errorMsgEl.textContent = msg;
+  }
+
+  function parseContent(html) {
+    if (!html) return '';
+    // Clean up hashtag links to make them styled
+    return html
+      .replace(/<a href="[^"]*\/tags\/[^"]*" class="mention hashtag[^"]*"[^>]*>#<span>([^<]*)<\/span><\/a>/g, '<a href="https://social.chius.cc/tags/$1" class="hashtag" target="_blank">#$1</a>');
+  }
+
+  function formatDate(dateStr) {
+    var d = new Date(dateStr);
+    if (isNaN(d.getTime())) return dateStr;
+    var y = d.getFullYear();
+    var m = String(d.getMonth() + 1).padStart(2, '0');
+    var day = String(d.getDate()).padStart(2, '0');
+    var h = String(d.getHours()).padStart(2, '0');
+    var min = String(d.getMinutes()).padStart(2, '0');
+    return y + '-' + m + '-' + day + ' ' + h + ':' + min;
+  }
+
+  fetch(rssUrl)
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(function(xmlText) {
+      var parser = new DOMParser();
+      var xml = parser.parseFromString(xmlText, 'application/xml');
+      if (xml.querySelector('parsererror')) throw new Error('RSS 解析失败');
+
+      var items = xml.querySelectorAll('item');
+      if (!items.length) { noDataEl.classList.remove('hidden'); return; }
+
+      loadingEl.style.display = 'none';
+      var limit = 20;
+      for (var i = 0; i < Math.min(items.length, limit); i++) {
+        var item = items[i];
+        var link = item.querySelector('link').textContent;
+        var guid = item.querySelector('guid').textContent;
+        var pubDate = item.querySelector('pubDate').textContent;
+        var title = item.querySelector('title').textContent || '';
+        var contentEncoded = item.querySelector('encoded');
+        var contentHtml = contentEncoded ? contentEncoded.textContent : '';
+        var attachments = item.querySelectorAll('enclosure');
+
+        var el = document.createElement('div');
+        el.className = 'social-item';
+
+        var html = '<div class="social-meta">';
+        html += '<time>' + formatDate(pubDate) + '</time>';
+        html += '</div>';
+
+        html += '<div class="social-content">' + parseContent(contentHtml) + '</div>';
+
+        if (attachments.length > 0) {
+          html += '<div class="social-attachments">';
+          attachments.forEach(function(enc) {
+            if ((enc.getAttribute('type') || '').startsWith('image/')) {
+              html += '<img src="' + enc.getAttribute('url') + '" loading="lazy" alt="">';
+            }
+          });
+          html += '</div>';
+        }
+
+        html += '<div class="social-link"><a href="' + link + '" target="_blank">查看原文 &rarr;</a></div>';
+
+        el.innerHTML = html;
+        timelineEl.appendChild(el);
+      }
+    })
+    .catch(function(e) {
+      showError(e.message);
+    });
+
+  document.getElementById('retry-btn').addEventListener('click', function() {
+    timelineEl.innerHTML = '';
+    loadingEl.style.display = 'block';
+    errorEl.classList.add('hidden');
+    noDataEl.classList.add('hidden');
+    location.reload();
+  });
+});
+</script>
+{{ end }}
