@@ -18,6 +18,14 @@ title = "Blogus Chii"
   [[params.author.links]]
     github = "https://github.com/chius-me"
   [[params.author.links]]
+    linkedin = "https://linkedin.com/in/chius-me"
+  [[params.author.links]]
     mastodon = "https://social.chius.cc/@chius"
+  [[params.author.links]]
+    telegram = "https://t.me/YaoChius"
+  [[params.author.links]]
+    graduation-cap = "https://www.upc.edu.cn/"
+  [[params.author.links]]
+    envelope = "mailto:contact@chius.cc"
   [[params.author.links]]
     rss = "https://blog.chius.cc/index.xml"
