@@ -15,7 +15,7 @@
 
 [[main]]
   name = "Toots"
-  pageRef = "notes"
+  pageRef = "fediverse"
   weight = 17
 
 [[main]]
