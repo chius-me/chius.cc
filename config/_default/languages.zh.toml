@@ -13,14 +13,14 @@ title = "Blogus Chii"
 
 [params.author]
   name = "Chius"
-  headline = "🥰 欢迎来到我的个人博客"
+  headline = "🥰 这里是 Chius ! 我是一位 UPC 在读本科生，同时也是"
 
   [[params.author.links]]
     github = "https://github.com/chius-me"
   [[params.author.links]]
     linkedin = "https://linkedin.com/in/chius-me"
   [[params.author.links]]
-    mastodon = "https://social.chius.cc/@chius"
+    activitypub = "https://social.chius.cc/@chius"
   [[params.author.links]]
     telegram = "https://t.me/YaoChius"
   [[params.author.links]]
