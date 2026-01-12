@@ -26,6 +26,8 @@ title = "Blogus Chii"
   [[params.author.links]]
     graduation-cap = "https://www.upc.edu.cn/"
   [[params.author.links]]
+    bilibili = "https://space.bilibili.com/215003532"
+  [[params.author.links]]
     envelope = "mailto:contact@chius.cc"
   [[params.author.links]]
     rss = "https://blog.chius.cc/index.xml"
