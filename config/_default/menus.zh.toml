@@ -22,8 +22,3 @@
   name = "标签"
   pageRef = "tags"
   weight = 30
-
- [[footer]]
-   name = "标签"
-   pageRef = "tags"
-   weight = 10

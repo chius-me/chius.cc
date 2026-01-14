@@ -13,21 +13,21 @@ title = "Blogus Chii"
 
 [params.author]
   name = "Chius"
-  headline = "🥰 这里是 Chius ! 我是一位 UPC 在读本科生，同时也是"
+  headline = "这里是 Chius ! 我是一位 UPC 在读本科生 🥰<br>同时也是软件开发者、HomeLabber 和 Linux 狂热爱好者"
 
+  [[params.author.links]]
+    envelope = "mailto:contact@chius.cc"
+  [[params.author.links]]
+    graduation-cap = "https://www.upc.edu.cn/"
   [[params.author.links]]
     github = "https://github.com/chius-me"
   [[params.author.links]]
     linkedin = "https://linkedin.com/in/chius-me"
   [[params.author.links]]
-    activitypub = "https://social.chius.cc/@chius"
-  [[params.author.links]]
     telegram = "https://t.me/YaoChius"
   [[params.author.links]]
-    graduation-cap = "https://www.upc.edu.cn/"
+    activitypub = "https://social.chius.cc/@chius"
   [[params.author.links]]
     bilibili = "https://space.bilibili.com/215003532"
-  [[params.author.links]]
-    envelope = "mailto:contact@chius.cc"
   [[params.author.links]]
     rss = "https://blog.chius.cc/index.xml"
