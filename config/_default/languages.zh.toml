@@ -13,6 +13,7 @@ title = "Blogus Chii"
 
 [params.author]
   name = "Chius"
+  image = "img/chius-pixel.compression.png"
   headline = "这里是 Chius ! 我是一位 UPC 在读本科生 🥰<br>同时也是软件开发者、HomeLabber 和 Linux 狂热爱好者"
 
   [[params.author.links]]
