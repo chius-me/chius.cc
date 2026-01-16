@@ -10,7 +10,7 @@
 
 [[main]]
   name = "碎碎念"
-  pageRef = "thoughts"
+  pageRef = "memos"
   weight = 15
 
 [[main]]
