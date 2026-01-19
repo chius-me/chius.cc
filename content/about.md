@@ -1,6 +1,8 @@
 ---
 title: "关于"
 description: "关于我和这个博客"
+showWordCount: false
+showReadingTime: false
 showRelatedContent: false
 showPagination: false
 layoutBackgroundHeaderSpace: false
