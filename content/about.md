@@ -22,4 +22,4 @@ layoutBackgroundHeaderSpace: false
 
 如果你觉得我的内容对你有帮助，可以请我喝杯咖啡 ☕
 
-[![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/chius)
+<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support me on Ko-fi', '#72a4f2', 'W7W11QZQM5');kofiwidget2.draw();</script>
