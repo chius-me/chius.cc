@@ -18,10 +18,6 @@ layoutBackgroundHeaderSpace: false
 
 日常碎碎念通过 [Memos](https://memos.chius.cc) 发布，嘟文通过 [GoToSocial](https://social.chius.cc/@chius) 同步。
 
-## Sponsor
-
-如果你觉得我的内容对你有帮助，可以请我喝杯咖啡 ☕
-
 <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
 <script>
   kofiWidgetOverlay.draw('chius', {
