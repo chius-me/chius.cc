@@ -5,6 +5,7 @@ showWordCount: false
 showReadingTime: false
 showRelatedContent: false
 showPagination: false
+showComments: false
 layoutBackgroundHeaderSpace: false
 ---
 
