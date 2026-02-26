@@ -49,6 +49,7 @@ defaultBackgroundImage = "img/background.svg"
   showHeadingAnchors = true
   showRelatedContent = true
   relatedContentLimit = 5
+  showComments = true
 
 [list]
   showHero = true
