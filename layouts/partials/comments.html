@@ -21,21 +21,30 @@
     return document.documentElement.classList.contains('dark') ? 'noborder_gray' : 'noborder_light';
   }
 
-  function sendGiscusTheme(theme) {
+  function sendTheme(theme) {
     var frame = document.querySelector('iframe.giscus-frame');
-    if (frame && frame.contentWindow) {
-      frame.contentWindow.postMessage({
-        giscus: { setConfig: { theme: theme } }
-      }, 'https://giscus.app');
-    }
+    if (!frame || !frame.contentWindow) return;
+    frame.contentWindow.postMessage({
+      giscus: { setConfig: { theme: theme } }
+    }, 'https://giscus.app');
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    sendGiscusTheme(getTheme());
-  });
+  function initTheme() {
+    sendTheme(getTheme());
+  }
 
+  // 等待 Giscus iframe 出现
+  var observer = new MutationObserver(function(mutations, obs) {
+    if (document.querySelector('iframe.giscus-frame')) {
+      initTheme();
+      obs.disconnect();
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // 监听博客主题切换
   new MutationObserver(function() {
-    sendGiscusTheme(getTheme());
+    sendTheme(getTheme());
   }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 })();
 </script>
