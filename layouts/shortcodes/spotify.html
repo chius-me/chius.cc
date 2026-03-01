@@ -1,0 +1,52 @@
+{{/* Spotify now-playing via Last.fm */}}
+{{ $user := .Get "user" | default "chius-fm" }}
+{{ $key := .Get "key" | default "5453db9c78d3445aabd2dfc1189ddabc" }}
+{{ $id := now.UnixMilli }}
+
+<div id="spotify-{{ $id }}" class="spotify-np"></div>
+
+<script>
+(function() {
+  var container = document.getElementById('spotify-{{ $id }}');
+  var user = {{ $user }};
+  var key = {{ $key }};
+  var api = 'https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user='
+    + user + '&api_key=' + key + '&format=json&limit=1';
+
+  fetch(api)
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var track = data.recenttracks && data.recenttracks.track;
+      var current = track && (Array.isArray(track) ? track[0] : track);
+      if (!current) { container.innerHTML = ''; return; }
+
+      var playing = current['@attr'] && current['@attr'].nowplaying === 'true';
+      var artist = current.artist ? current.artist['#text'] || current.artist.name : '';
+      var name = current.name || '';
+      var img = current.image ? current.image[current.image.length - 1]['#text'] : '';
+      var album = current.album ? (current.album['#text'] || current.album.name) : '';
+
+      var html = '<div class="spotify-item">';
+      if (img) html += '<img src="' + img + '" class="spotify-cover">';
+      html += '<div class="spotify-info"><div class="spotify-status">' + (playing ? '正在听 🎵' : '最近听过') + '</div>';
+      html += '<div class="spotify-track">' + name + '</div>';
+      html += '<div class="spotify-artist">' + artist + '</div>';
+      if (album) html += '<div class="spotify-album">' + album + '</div>';
+      html += '</div></div>';
+      container.innerHTML = html;
+    })
+    .catch(function() { container.innerHTML = ''; });
+})();
+</script>
+
+<style>
+.spotify-np { max-width: 360px; }
+.spotify-item { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 1rem; border-radius: 0.75rem; background: var(--color-neutral-100, #f5f5f5); margin: 1rem 0; }
+[data-auto-appearance="true"] :root.dark .spotify-item,
+.dark .spotify-item { background: var(--color-neutral-800, #2d2d2d); }
+.spotify-cover { width: 64px; height: 64px; border-radius: 0.5rem; object-fit: cover; flex-shrink: 0; }
+.spotify-status { font-size: 0.75rem; color: var(--color-primary-400, #3b82f6); margin-bottom: 0.125rem; }
+.spotify-track { font-weight: 600; line-height: 1.3; }
+.spotify-artist { font-size: 0.875rem; color: var(--color-neutral-500, #666); }
+.spotify-album { font-size: 0.8rem; color: var(--color-neutral-400, #999); }
+</style>
