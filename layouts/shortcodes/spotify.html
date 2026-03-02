@@ -1,52 +1,116 @@
-{{/* Spotify now-playing via Last.fm */}}
+{{/* Spotify now-playing floating button (bottom-right) */}}
 {{ $user := .Get "user" | default "chius-fm" }}
 {{ $key := .Get "key" | default "5453db9c78d3445aabd2dfc1189ddabc" }}
-{{ $id := now.UnixMilli }}
 
-<div id="spotify-{{ $id }}" class="spotify-np"></div>
+<div id="spotify-float" class="spotify-float">
+  <button id="spotify-float-btn" class="spotify-float-btn" title="正在听">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+  </button>
+  <div id="spotify-float-popup" class="spotify-float-popup">
+    <img class="spotify-float-cover" src="" alt="">
+    <div class="spotify-float-info">
+      <div class="spotify-float-status"></div>
+      <div class="spotify-float-track"></div>
+      <div class="spotify-float-artist"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+.spotify-float {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 50;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+.spotify-float-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-primary-500, #1DB954);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+.spotify-float-btn svg { width: 22px; height: 22px; }
+.spotify-float-btn:hover { transform: scale(1.1); }
+.spotify-float-btn.playing { animation: spotify-pulse 2s infinite; }
+@keyframes spotify-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(29,185,84,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(29,185,84,0); }
+}
+.spotify-float-popup {
+  display: none;
+  background: var(--color-neutral, #fff);
+  border: 1px solid var(--color-neutral-300, #d1d5db);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  max-width: 260px;
+  align-items: center;
+  gap: 0.75rem;
+}
+.spotify-float:hover .spotify-float-popup,
+.spotify-float-popup:hover { display: flex; }
+.spotify-float-popup:hover ~ .spotify-float-popup { display: flex; }
+.dark .spotify-float-popup {
+  background: var(--color-neutral-800, #2d2d2d);
+  border-color: var(--color-neutral-600, #4b5563);
+}
+.spotify-float-cover {
+  width: 52px;
+  height: 52px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: none;
+}
+.spotify-float-info { min-width: 0; }
+.spotify-float-status { font-size: 0.7rem; color: var(--color-primary-400, #1DB954); margin-bottom: 0.125rem; }
+.spotify-float-track { font-size: 0.85rem; font-weight: 600; line-height: 1.2; word-break: break-word; }
+.spotify-float-artist { font-size: 0.75rem; color: var(--color-neutral-500, #666); margin-top: 0.125rem; }
+</style>
 
 <script>
 (function() {
-  var container = document.getElementById('spotify-{{ $id }}');
-  var user = {{ $user }};
-  var key = {{ $key }};
-  var api = 'https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user='
-    + user + '&api_key=' + key + '&format=json&limit=1';
+  var api = 'https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=' + {{ $user }}
+    + '&api_key=' + {{ $key }} + '&format=json&limit=1';
 
-  fetch(api)
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      var track = data.recenttracks && data.recenttracks.track;
-      var current = track && (Array.isArray(track) ? track[0] : track);
-      if (!current) { container.innerHTML = ''; return; }
+  var btn = document.getElementById('spotify-float-btn');
+  var popup = document.getElementById('spotify-float-popup');
+  var status = popup.querySelector('.spotify-float-status');
+  var track = popup.querySelector('.spotify-float-track');
+  var artist = popup.querySelector('.spotify-float-artist');
+  var cover = popup.querySelector('.spotify-float-cover');
 
-      var playing = current['@attr'] && current['@attr'].nowplaying === 'true';
-      var artist = current.artist ? current.artist['#text'] || current.artist.name : '';
-      var name = current.name || '';
-      var img = current.image ? current.image[current.image.length - 1]['#text'] : '';
-      var album = current.album ? (current.album['#text'] || current.album.name) : '';
+  function update(url) {
+    fetch(url).then(function(r) { return r.json(); }).then(function(d) {
+      var t = d.recenttracks && d.recenttracks.track;
+      var c = t && (Array.isArray(t) ? t[0] : t);
+      if (!c) { popup.style.display = 'none'; return; }
+      var playing = c['@attr'] && c['@attr'].nowplaying === 'true';
+      if (!playing) return;
 
-      var html = '<div class="spotify-item">';
-      if (img) html += '<img src="' + img + '" class="spotify-cover">';
-      html += '<div class="spotify-info"><div class="spotify-status">' + (playing ? '正在听 🎵' : '最近听过') + '</div>';
-      html += '<div class="spotify-track">' + name + '</div>';
-      html += '<div class="spotify-artist">' + artist + '</div>';
-      if (album) html += '<div class="spotify-album">' + album + '</div>';
-      html += '</div></div>';
-      container.innerHTML = html;
-    })
-    .catch(function() { container.innerHTML = ''; });
+      btn.classList.add('playing');
+      status.textContent = '正在听 🎵';
+      track.textContent = c.name || '';
+      artist.textContent = (c.artist && (c.artist['#text'] || c.artist.name)) || '';
+      var img = c.image ? c.image[c.image.length-1]['#text'] : '';
+      if (img) { cover.src = img; cover.style.display = 'block'; }
+    }).catch(function() {});
+  }
+
+  update(api);
+  setInterval(function() { update(api); }, 30000);
 })();
 </script>
-
-<style>
-.spotify-np { max-width: 360px; }
-.spotify-item { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 1rem; border-radius: 0.75rem; background: var(--color-neutral-100, #f5f5f5); margin: 1rem 0; }
-[data-auto-appearance="true"] :root.dark .spotify-item,
-.dark .spotify-item { background: var(--color-neutral-800, #2d2d2d); }
-.spotify-cover { width: 64px; height: 64px; border-radius: 0.5rem; object-fit: cover; flex-shrink: 0; }
-.spotify-status { font-size: 0.75rem; color: var(--color-primary-400, #3b82f6); margin-bottom: 0.125rem; }
-.spotify-track { font-weight: 600; line-height: 1.3; }
-.spotify-artist { font-size: 0.875rem; color: var(--color-neutral-500, #666); }
-.spotify-album { font-size: 0.8rem; color: var(--color-neutral-400, #999); }
-</style>
