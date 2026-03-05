@@ -3,18 +3,10 @@
 {{ $key := .Get "key" | default "5453db9c78d3445aabd2dfc1189ddabc" }}
 
 <div id="spotify-float" class="spotify-float">
-  <button id="spotify-float-btn" class="spotify-float-btn">
+  <a id="spotify-float-btn" class="spotify-float-btn" href="https://last.fm/user/chius-fm" target="_blank" title="Last.fm">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-    <span id="spotify-float-label">正在听</span>
-  </button>
-  <div id="spotify-float-popup" class="spotify-float-popup">
-    <img class="spotify-float-cover" src="" alt="">
-    <div class="spotify-float-info">
-      <div class="spotify-float-track"></div>
-      <div class="spotify-float-artist"></div>
-    </div>
-    <button id="spotify-float-close" class="spotify-float-close">&times;</button>
-  </div>
+    <span id="spotify-float-text"></span>
+  </a>
 </div>
 
 <style>
@@ -23,81 +15,31 @@
   right: 1.5rem;
   bottom: 1.5rem;
   z-index: 50;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-end;
 }
 .spotify-float-btn {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
   padding: 10px 18px;
   border-radius: 9999px;
-  border: none;
   background: #1DB954;
   color: #fff;
-  cursor: pointer;
+  text-decoration: none;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  transition: transform 0.2s;
   font-size: 14px;
   font-weight: 500;
   white-space: nowrap;
+  max-width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.spotify-float-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
-.spotify-float-btn:hover { transform: scale(1.05); }
-.spotify-float-btn.playing { animation: spotify-pulse 2s infinite; }
-@keyframes spotify-pulse {
+.spotify-float-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+.spotify-float-btn:hover { transform: scale(1.05); transition: transform 0.2s; }
+.spotify-float-btn.playing { animation: sp-pulse 2s infinite; }
+@keyframes sp-pulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(29,185,84,0.4); }
   50% { box-shadow: 0 0 0 10px rgba(29,185,84,0); }
 }
-.spotify-float-popup {
-  position: absolute;
-  right: 0;
-  bottom: calc(100% + 10px);
-  display: none;
-  background: var(--color-neutral, #fff);
-  border: 1px solid var(--color-neutral-300, #d1d5db);
-  border-radius: 12px;
-  padding: 14px 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  width: 280px;
-  flex-direction: column;
-  gap: 10px;
-}
-.spotify-float-popup.open { display: flex; }
-.dark .spotify-float-popup {
-  background: var(--color-neutral-800, #2d2d2d);
-  border-color: var(--color-neutral-600, #4b5563);
-}
-.spotify-float-popup-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.spotify-float-cover {
-  width: 56px;
-  height: 56px;
-  border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-.spotify-float-info { min-width: 0; }
-.spotify-float-track { font-size: 14px; font-weight: 600; line-height: 1.3; word-break: break-word; }
-.spotify-float-artist { font-size: 12px; color: var(--color-neutral-500, #666); margin-top: 3px; }
-.spotify-float-close {
-  position: absolute;
-  top: 6px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: var(--color-neutral-400, #999);
-  cursor: pointer;
-  line-height: 1;
-  padding: 0;
-}
-.spotify-float-close:hover { color: var(--color-neutral-700, #333); }
-.dark .spotify-float-close:hover { color: var(--color-neutral-200, #ccc); }
 </style>
 
 <script>
@@ -106,14 +48,7 @@
     + '&api_key=' + {{ $key }} + '&format=json&limit=1';
 
   var btn = document.getElementById('spotify-float-btn');
-  var label = document.getElementById('spotify-float-label');
-  var popup = document.getElementById('spotify-float-popup');
-  var track = popup.querySelector('.spotify-float-track');
-  var artist = popup.querySelector('.spotify-float-artist');
-  var cover = popup.querySelector('.spotify-float-cover');
-  var closeBtn = document.getElementById('spotify-float-close');
-  var opened = false;
-  var currentData = null;
+  var text = document.getElementById('spotify-float-text');
 
   function update(url) {
     fetch(url).then(function(r) { return r.json(); }).then(function(d) {
@@ -121,61 +56,19 @@
       var c = t && (Array.isArray(t) ? t[0] : t);
       if (!c) { btn.style.display = 'none'; return; }
       var playing = c['@attr'] && c['@attr'].nowplaying === 'true';
+      var name = c.name || '';
+      var artist = (c.artist && (c.artist['#text'] || c.artist.name)) || '';
 
       if (playing) {
         btn.classList.add('playing');
-        label.textContent = '正在听';
-        currentData = {
-          track: c.name || '',
-          artist: (c.artist && (c.artist['#text'] || c.artist.name)) || '',
-          cover: c.image ? c.image[c.image.length-1]['#text'] : ''
-        };
+        text.textContent = '正在听 ' + name + ' - ' + artist;
       } else {
         btn.classList.remove('playing');
-        label.textContent = '最近听过';
-        currentData = {
-          track: c.name || '',
-          artist: (c.artist && (c.artist['#text'] || c.artist.name)) || '',
-          cover: c.image ? c.image[c.image.length-1]['#text'] : ''
-        };
+        text.textContent = '最近听过 ' + name + ' - ' + artist;
       }
       btn.style.display = 'flex';
     }).catch(function() {});
   }
-
-  function showPopup() {
-    if (!currentData) return;
-    track.textContent = currentData.track;
-    artist.textContent = currentData.artist;
-    if (currentData.cover) {
-      cover.src = currentData.cover;
-      cover.style.display = 'block';
-    } else {
-      cover.style.display = 'none';
-    }
-    popup.classList.add('open');
-    opened = true;
-  }
-
-  function hidePopup() {
-    popup.classList.remove('open');
-    opened = false;
-  }
-
-  btn.addEventListener('click', function() {
-    opened ? hidePopup() : showPopup();
-  });
-
-  closeBtn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    hidePopup();
-  });
-
-  document.addEventListener('click', function(e) {
-    if (opened && !popup.contains(e.target) && e.target !== btn) {
-      hidePopup();
-    }
-  });
 
   update(api);
   setInterval(function() { update(api); }, 30000);
