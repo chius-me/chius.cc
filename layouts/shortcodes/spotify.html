@@ -33,6 +33,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+@media (max-width: 640px) {
+  .spotify-float-btn { padding: 10px; }
+  .spotify-float-btn #spotify-float-text { display: none; }
+}
 .spotify-float-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 .spotify-float-btn:hover { transform: scale(1.05); transition: transform 0.2s; }
 .spotify-float-btn.playing { animation: sp-pulse 2s infinite; }
