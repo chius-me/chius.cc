@@ -28,5 +28,27 @@ layoutBackgroundHeaderSpace: false
     'floating-chat.donateButton.text-color': '#fff'
   });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var toggle = document.getElementById('mobile-menu-toggle');
+  if (!toggle) return;
+  var selectors = '.floatingchat-container-wrapper,[id*="kofi"],[id*="floatingchat"]';
+  function setKofi(show) {
+    document.querySelectorAll(selectors).forEach(function(el) {
+      if (el.style) el.style.display = show ? '' : 'none';
+    });
+  }
+  var timer;
+  toggle.addEventListener('change', function() {
+    clearInterval(timer);
+    if (this.checked) {
+      setKofi(false);
+      timer = setInterval(function() { setKofi(false); }, 200);
+    } else {
+      setKofi(true);
+    }
+  });
+});
+</script>
 
 {{< spotify >}}
