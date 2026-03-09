@@ -79,6 +79,7 @@
 .memo-content p { margin-bottom: 1rem; }
 .memo-content p:last-child { margin-bottom: 0; }
 .memo-content a { color: rgba(var(--color-primary-700), 1); text-decoration: underline; }
+.memo-content img { max-width: 100%; border-radius: 0.5rem; margin: 0.5rem 0; }
 .memo-content blockquote {
   border-left: 3px solid #e5e7eb;
   padding-left: 1rem;
@@ -140,6 +141,7 @@ class MemosClient {
   formatContent(content) {
     if (!content) return '';
     return content
+      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="memos-img" loading="lazy">')
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
       .replace(/\*([^*]+)\*/g, '<em>$1</em>')
