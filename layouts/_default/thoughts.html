@@ -80,6 +80,8 @@
 .memo-content p:last-child { margin-bottom: 0; }
 .memo-content a { color: rgba(var(--color-primary-700), 1); text-decoration: underline; }
 .memo-content img { max-width: 100%; border-radius: 0.5rem; margin: 0.5rem 0; }
+.memo-attachment { margin-top: 0.5rem; }
+.memo-attachment img { max-width: 100%; border-radius: 0.5rem; display: block; }
 .memo-content blockquote {
   border-left: 3px solid #e5e7eb;
   padding-left: 1rem;
@@ -167,8 +169,21 @@ class MemosClient {
     var el = document.createElement('div');
     el.className = 'memo-item';
     var time = memo.createTime || memo.createdTs || memo.created_at || memo.updatedTs || '';
+    var contentHtml = this.formatContent(memo.content || memo.text || '');
+
+    var attachHtml = '';
+    if (memo.attachments && memo.attachments.length) {
+      memo.attachments.forEach(function(a) {
+        if (a.type && a.type.startsWith('image/')) {
+          var src = a.externalLink || (this.serverURL + '/file/' + a.name + '/' + a.filename);
+          attachHtml += '<div class="memo-attachment"><img src="' + src + '" alt="" loading="lazy"></div>';
+        }
+      });
+    }
+
     el.innerHTML = '<div class="memo-time">' + this.formatDate(time) + '</div>' +
-      '<div class="memo-content"><p>' + this.formatContent(memo.content || memo.text || '') + '</p></div>';
+      '<div class="memo-content"><p>' + contentHtml + '</p></div>' +
+      attachHtml;
     return el;
   }
 }
