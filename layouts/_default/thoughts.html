@@ -173,7 +173,7 @@ class MemosClient {
 
     var attachHtml = '';
     if (memo.attachments && memo.attachments.length) {
-      memo.attachments.forEach(function(a) {
+      memo.attachments.forEach((a) => {
         if (a.type && a.type.startsWith('image/')) {
           var src = a.externalLink || (this.serverURL + '/file/' + a.name + '/' + a.filename);
           attachHtml += '<div class="memo-attachment"><img src="' + src + '" alt="" loading="lazy"></div>';
