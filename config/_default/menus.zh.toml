@@ -24,6 +24,11 @@
   weight = 30
 
 [[main]]
+  name = "友链"
+  pageRef = "links"
+  weight = 35
+
+[[main]]
   name = "关于"
   pageRef = "about"
   weight = 40
