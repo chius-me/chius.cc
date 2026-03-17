@@ -10,3 +10,20 @@ showEdit: false
 showPagination: false
 layoutBackgroundHeaderSpace: false
 ---
+
+想要交换友链？欢迎提交 [PR](https://github.com/chius-me/hugo/pulls)！
+
+在 `content/links/` 下创建一个 Markdown 文件即可：
+
+```yaml
+---
+title: "你的站点名称"
+externalUrl: "https://你的域名.com"
+description: "一句话描述你的站点"
+weight: 50
+showDate: false
+showAuthor: false
+showReadingTime: false
+showEdit: false
+---
+```
