@@ -87,9 +87,12 @@
     <div class="text-sm text-neutral-500 dark:text-neutral-400">
       {{ partial "article-meta/basic.html" . }}
     </div>
-    {{ if .Params.showSummary | default (.Site.Params.list.showSummary | default false) }}
-      {{ $summary := .Params.description | default (.Summary | plainify) }}
-      {{ with $summary }}
+    {{ if .Params.description }}
+      <div class="article-link__summary prose dark:prose-invert mt-1 line-clamp-5">
+        {{ .Params.description }}
+      </div>
+    {{ else if .Params.showSummary | default (.Site.Params.list.showSummary | default false) }}
+      {{ with .Summary | plainify }}
         <div class="article-link__summary prose dark:prose-invert mt-1 line-clamp-5">
           {{ . }}
         </div>
