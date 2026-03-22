@@ -21,13 +21,8 @@ layoutBackgroundHeaderSpace: false
 ```yaml
 ---
 title: "你的站点名称"
-externalUrl: "https://你的域名.com"
-description: "一句话描述你的站点"
-weight: 50
-showDate: false
-showAuthor: false
-showReadingTime: false
-showEdit: false
+externalUrl: "https://example.com"
+description: "一句话描述"
 ---
 ```
 
