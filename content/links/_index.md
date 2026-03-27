@@ -16,7 +16,8 @@ layoutBackgroundHeaderSpace: false
 <details>
 <summary><strong>查看添加方式</strong></summary>
 
-在 `content/links/` 下创建一个 Markdown 文件即可：
+1. **Fork** 本仓库
+2. 在你的仓库 **`main` 分支**的 `content/links/` 下创建一个 Markdown 文件：
 
 ```yaml
 ---
@@ -25,5 +26,7 @@ externalUrl: "https://example.com"
 description: "一句话描述"
 ---
 ```
+
+3. 提交 **Pull Request**
 
 </details>
