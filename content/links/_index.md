@@ -24,6 +24,7 @@ layoutBackgroundHeaderSpace: false
 title: "你的站点名称"
 externalUrl: "https://example.com"
 description: "一句话描述"
+featureimage: "https://example.com/avatar.png"   # 可选，站点Logo或截图
 ---
 ```
 
