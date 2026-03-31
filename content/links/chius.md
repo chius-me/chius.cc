@@ -1,5 +1,0 @@
----
-title: "Blogus Chii"
-externalUrl: "https://blog.chius.cc"
-description: "Chius's Blog"
----
