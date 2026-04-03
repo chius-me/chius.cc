@@ -1,5 +1,5 @@
 ---
-title: "记录两次与bilibili技术岗的面试"
+title: "记录两次 bilibili 技术岗的面试经历"
 date: 2026-05-27T23:00:00+08:00
 draft: false
 tags: ["面试","bilibili","技术岗","实习","求职","职业规划"]
