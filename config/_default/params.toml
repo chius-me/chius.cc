@@ -9,6 +9,7 @@ enableStructuredBreadcrumbs = true
 mainSections = ["posts"]
 
 defaultBackgroundImage = "img/background.svg"
+hotlinkFeatureImage = true
 
 [header]
   layout = "fixed"
