@@ -1,6 +1,6 @@
 ---
 title: "分享我的 Glance Homepage 配置"
-date: 2026-06-08T23:00:00+08:00
+date: 2026-06-08
 draft: false
 tags: ["Glance","Homepage","配置","分享","HomeLab"]
 ---
