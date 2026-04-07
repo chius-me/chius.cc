@@ -78,8 +78,5 @@ hotlinkFeatureImage = true
   groupByYear = false
   cardView = true
 
-[memos]
-  serverURL = "https://memos.chius.cc"
-
 [gotosocial]
   rssURL = "https://social.chius.cc/@chius/feed.rss"

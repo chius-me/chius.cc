@@ -17,7 +17,7 @@ layoutBackgroundHeaderSpace: false
 
 本站基于 [Hugo](https://gohugo.io/) 和 [Blowfish](https://blowfish.page/) 主题构建，托管于 [Cloudflare](https://www.cloudflare.com/)。
 
-日常碎碎念通过 [Memos](https://memos.chius.cc) 发布，嘟文通过 [GoToSocial](https://social.chius.cc/@chius) 同步。
+嘟文通过 [GoToSocial](https://social.chius.cc/@chius) 同步。
 
 <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
 <script>
