@@ -9,11 +9,6 @@
   weight = 20
 
 [[main]]
-  name = "碎碎念"
-  pageRef = "memos"
-  weight = 15
-
-[[main]]
   name = "嘟嘟"
   pageRef = "fediverse"
   weight = 17
