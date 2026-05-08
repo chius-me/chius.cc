@@ -2,3 +2,7 @@
 public/
 .hugo_build.lock
 docs/
+resources/
+.wrangler/
+.DS_Store
+Thumbs.db
