@@ -1,4 +1,4 @@
-baseURL = "https://blog.chius.cc/"
+baseURL = "https://chius.cc/"
 theme = "blowfish"
 defaultContentLanguage = "zh"
 hasCJKLanguage = true

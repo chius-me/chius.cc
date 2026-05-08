@@ -3,6 +3,12 @@ const CREDLY_URL = "https://www.credly.com/users/yao-chius/badges";
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    const host = request.headers.get("Host") || url.hostname;
+
+    if (host === "blog.chius.cc") {
+      const redirectUrl = `https://chius.cc${url.pathname}${url.search}${url.hash}`;
+      return Response.redirect(redirectUrl, 301);
+    }
 
     if (url.pathname === "/api/credly") {
       const resp = await fetch(CREDLY_URL, {
