@@ -1,0 +1,121 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
+cv:
+  name: Yao Chius
+  headline: 通信工程本科生 · 软件开发者 · HomeLabber · Linux 狂热爱好者
+  photo: avatar-circle.png
+  email: contact@chius.cc
+  custom_connections:
+    - fontawesome_icon: link
+      placeholder: "chius.cc"
+      url: https://chius.cc/
+    - fontawesome_icon: pen-nib
+      placeholder: Blog
+      url: https://blog.chius.cc/
+    - fontawesome_icon: github
+      placeholder: GitHub
+      url: https://github.com/chius-me
+    - fontawesome_icon: linkedin
+      placeholder: LinkedIn
+      url: https://linkedin.com/in/chius-me
+  sections:
+    教育经历:
+      - institution: 中国石油大学
+        area: 通信工程
+        degree: 工学学士
+        location: 青岛, 中国
+        start_date: 2023-09
+        end_date: present
+        highlights:
+          - "核心课程：C/C++、计算机网络、数据结构、Linux 嵌入式、人工智能模型与算法"
+
+    实习经历:
+      - company: 亿纬锂能
+        position: IT 部门
+        location: 惠州 广东
+        start_date: 2026-06
+        end_date: present
+        highlights:
+          - "未定"
+
+    技术能力:
+      - label: 编程语言
+        details: Shell, Go, Python, C, JavaScript
+      - label: 开发工具
+        details: Vim, Git, Docker, GitHub Actions
+      - label: AI Agent
+        details: opencode, Hermes Agent, Multica, Codex
+      - label: Selfhost
+        details: Forgejo, ArgoCD, Kubernetes, Proxmox VE, TrueNAS
+      - label: SaaS / PaaS
+        details: GitHub, Cloudflare, AWS/GCP/阿里云
+      - label: 英语能力
+        details: CET-6
+      - label: 兴趣方向
+        details: 自动化运维、开源软件、自托管程序
+
+    个人项目:
+      - name: HomeLab 混合云平台
+        date: 2024 – present
+        highlights:
+          - "基于 Proxmox VE 搭建家庭数据中心，运行二十余台虚拟机与上百容器。"
+          - "通过 WireGuard 构建覆盖移动设备、HomeLab、AWS 及阿里云的私有网络，通过 Cloudflare 对外暴露服务。"
+          - "TrueNAS 配置 ZFS RAIDZ1 保障数据安全，部署 MinIO 提供 S3 兼容对象存储。"
+          - "以 Forgejo 为内网 Git 中枢，Forgejo Actions + ArgoCD 对接 Kubernetes，实现 GitOps 全自动交付。"
+      - name: AI OPC 系列 ( 一人公司 )
+        highlights:
+          - "内网部署 Hermes Agent 集群( 3个 )，其一负责日常问答和各种实验、其一负责文章编写、其一负责项目辅助开发，实现个人工作流 AI 自动化。"
+          - '构建 Multica 多 Agent 框架，以 opencode 为 runtime，通过 Skill 组合赋予 Agent 不同角色，组成虚拟开发团队协同完成项目。 — #link("https://multica.lan.tamochi.cn/")[site]'
+      - name: Serverless 系列
+        highlights:
+          - 'uptime-worker: Serverless 服务可用性监控 — #link("https://github.com/chius-me/uptime-worker")[repo]'
+          - 'favicon-fisher: Favicon 抓取 Web 服务 — #link("https://github.com/chius-me/favicon-fisher")[repo]'
+          - 'whoami: curl whoami.chius.cc 展示终端电子名片 — #link("https://github.com/chius-me/whoami")[repo]'
+          - 'cv: 即本简历，基于 RenderCV 构建 — #link("https://github.com/chius-me/cv")[repo]'
+          - 'hugo: 个人博客，使用 Hugo 构建，动态加载我的 Memos 站点 和 Fediverse 站点 — #link("https://github.com/chius-me/hugo")[repo]'
+      - name: CI/CD 容器镜像系列
+        highlights:
+          - 'cloudflare-deploy: 预装 wrangler 的 node 容器镜像 — #link("https://github.com/chius-me/cloudflare-deploy")[repo]'
+          - 'alpine-pro: 加强版 alpine 容器镜像，用于 Forgejo 跑基础 CD 任务 — #link("https://github.com/chius-me/alpine-pro")[repo]'
+
+    比赛经历:
+      - name: 全国大学生集成电路创新创业大赛（算能杯）
+        date: 2026
+        highlights:
+          - "作品《基于 AMP 实时架构的反馈式导盲杖 —— Globi-V》，队长，负责 AI 模型训练、端侧移植与 Flutter 客户端开发。"
+      - name: 大学生创新创业大赛
+        date: "2024 – 2026"
+        highlights:
+          - "题目《基于 FPGA 的音源处理系统设计与实现》，队长，负责功能开发与文档整理。"
+
+    课程设计:
+      - name: SpringBoot + Vue 初级 Web 项目开发
+        date: 2024-07
+        highlights:
+          - "独立完成仓库管理系统的全栈开发与部署。"
+      - name: Flask + Kotlin 移动端 AI 应用开发
+        date: 2025-07
+        highlights:
+          - "负责后端 API 与公网反向代理部署，为 Android 客户端提供 AI 服务接口。"
+
+locale:
+  language: mandarin_chinese
+
+design:
+  theme: engineeringresumes
+  header:
+    connections:
+      show_icons: true
+  typography:
+    font_family:
+      body: "WenQuanYi Zen Hei"
+      name: "WenQuanYi Zen Hei"
+      headline: "WenQuanYi Zen Hei"
+      connections: "WenQuanYi Zen Hei"
+      section_titles: "WenQuanYi Zen Hei"
+
+settings:
+  render_command:
+    output_folder: rendercv_output
+    dont_generate_html: false
+    dont_generate_markdown: false
+    dont_generate_png: true

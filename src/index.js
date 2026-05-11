@@ -8,6 +8,10 @@ export default {
       return Response.redirect(redirectUrl, 301);
     }
 
+    if (host === "cv.chius.cc") {
+      return Response.redirect("https://chius.cc/cv.pdf", 301);
+    }
+
     return env.ASSETS.fetch(request);
   },
 };
