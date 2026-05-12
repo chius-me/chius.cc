@@ -9,6 +9,11 @@
   weight = 20
 
 [[main]]
+  name = "简历"
+  url = "/cv.pdf"
+  weight = 25
+
+[[main]]
   name = "嘟嘟"
   pageRef = "fediverse"
   weight = 17
