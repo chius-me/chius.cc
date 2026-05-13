@@ -32,3 +32,5 @@
   name = "简历"
   url = "/cv.pdf"
   weight = 50
+  [main.params]
+    target = "_blank"
