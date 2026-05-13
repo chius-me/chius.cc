@@ -68,7 +68,7 @@ cv:
           - 'favicon-fisher: Favicon 抓取 Web 服务 — #link("https://github.com/chius-me/favicon-fisher")[repo]'
           - 'whoami: curl whoami.chius.cc 展示终端电子名片 — #link("https://github.com/chius-me/whoami")[repo]'
           - 'cv: 即本简历，基于 RenderCV 构建 — #link("https://github.com/chius-me/cv")[repo]'
-          - 'hugo: 个人博客，使用 Hugo 构建，动态加载我的 Memos 站点 和 Fediverse 站点 — #link("https://github.com/chius-me/hugo")[repo]'
+          - 'hugo: 个人博客，使用 Hugo 构建，动态加载我的 Memos 站点 和 Fediverse 站点 — #link("https://github.com/chius-me/chius.cc")[repo]'
       - name: CI/CD 容器镜像系列
         highlights:
           - 'cloudflare-deploy: 预装 wrangler 的 node 容器镜像 — #link("https://github.com/chius-me/cloudflare-deploy")[repo]'

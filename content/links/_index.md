@@ -11,7 +11,7 @@ showPagination: false
 layoutBackgroundHeaderSpace: false
 ---
 
-想要交换友链？欢迎提交 [PR](https://github.com/chius-me/hugo/pulls)。
+想要交换友链？欢迎提交 [PR](https://github.com/chius-me/chius.cc/pulls)。
 
 <details>
 <summary><strong>查看添加方式</strong></summary>
