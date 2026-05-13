@@ -41,7 +41,9 @@ jobs:
 
       - name: Render CV
         run: |
-          rendercv render cv/cv-zh.yaml --output-folder cv/rendercv_output
+          cd cv
+          rendercv render cv-zh.yaml --output-folder rendercv_output
+          cd ..
           mkdir -p static
           cp cv/rendercv_output/Yao_Chius_CV.pdf static/cv.pdf
 
