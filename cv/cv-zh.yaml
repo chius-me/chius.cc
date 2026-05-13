@@ -3,14 +3,11 @@ cv:
   name: Yao Chius
   headline: 通信工程本科生 · 软件开发者 · HomeLabber · Linux 狂热爱好者
   photo: avatar-circle.png
-  email: contact@chius.cc
+  email: i@chius.cc
   custom_connections:
-    - fontawesome_icon: link
+    - fontawesome_icon: blog
       placeholder: "chius.cc"
       url: https://chius.cc/
-    - fontawesome_icon: pen-nib
-      placeholder: Blog
-      url: https://blog.chius.cc/
     - fontawesome_icon: github
       placeholder: GitHub
       url: https://github.com/chius-me
