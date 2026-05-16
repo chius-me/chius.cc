@@ -17,7 +17,7 @@ layoutBackgroundHeaderSpace: false
 <summary><strong>查看添加方式</strong></summary>
 
 1. **Fork** 本仓库
-2. 在你的仓库 **`main` 分支**的 `content/links/` 下创建一个 Markdown 文件：
+2. 在你的仓库 **`main` 分支**的 `content/friends/` 下创建一个 Markdown 文件：
 
 ```yaml
 ---

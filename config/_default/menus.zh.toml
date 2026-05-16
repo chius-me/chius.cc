@@ -20,7 +20,7 @@
 
 [[main]]
   name = "友链"
-  pageRef = "links"
+  pageRef = "friends"
   weight = 35
 
 [[main]]
