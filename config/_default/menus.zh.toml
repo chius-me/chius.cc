@@ -29,6 +29,11 @@
   weight = 40
 
 [[main]]
+  name = "社交链接"
+  url = "/links/"
+  weight = 45
+
+[[main]]
   name = "简历"
   url = "/cv.pdf"
   weight = 50

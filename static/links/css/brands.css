@@ -1,0 +1,44 @@
+.button,button {
+  color:var(--button-text,#000000);
+  background-color:var(--button-background,transparent);
+	border:var(--button-border,none);
+	transition:filter 0.2s ease,transform 0.2s ease;
+}
+.button:hover,button:hover {
+	filter:brightness(90%);
+	transform:translateY(-1px);
+}
+.icon {
+	filter:var(--icon-filter,none);
+}
+.button.button-default {
+	--button-text:#ffffff;
+	--button-background:#2457F5;
+	--button-border:1px solid #ffffff;
+}
+.button-github {
+	--button-text:#ffffff;
+	--button-background:#000000;
+	--button-border:1px solid #FFFFFF;
+}
+.button-linked {
+	--button-text:#ffffff;
+	--button-background:#2867b2;
+}
+.button-mastodon {
+	--button-text:#ffffff;
+	--button-background:#17063B;
+	--button-border:1px solid #FFFFFF;
+}
+.button-telegram {
+	--button-text:#ffffff;
+	--button-background:#3faee8;
+}
+.button-bilibili {
+	--button-text:#ffffff;
+	--button-background:#00aeec;
+}
+.button-bilibili:hover {
+	filter:brightness(90%);
+	--button-background:#00aeec;
+}
