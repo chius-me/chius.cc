@@ -19,16 +19,6 @@ title = "Blogus Chii"
   [[params.author.links]]
     envelope = "mailto:contact@chius.cc"
   [[params.author.links]]
-    graduation-cap = "https://www.upc.edu.cn/"
-  [[params.author.links]]
     github = "https://github.com/chius-me"
-  [[params.author.links]]
-    linkedin = "https://linkedin.com/in/chius-me"
-  [[params.author.links]]
-    telegram = "https://t.me/YaoChius"
-  [[params.author.links]]
-    activitypub = "https://social.chius.cc/@chius"
-  [[params.author.links]]
-    bilibili = "https://space.bilibili.com/215003532"
   [[params.author.links]]
     rss = "https://chius.cc/index.xml"
