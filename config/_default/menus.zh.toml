@@ -32,6 +32,8 @@
   name = "社交链接"
   url = "/links/"
   weight = 45
+  [main.params]
+    target = "_blank"
 
 [[main]]
   name = "简历"
