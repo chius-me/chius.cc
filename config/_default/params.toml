@@ -8,7 +8,7 @@ enableStructuredBreadcrumbs = true
 
 mainSections = ["posts"]
 
-defaultBackgroundImage = "img/background.svg"
+defaultBackgroundImage = "img/background.webp"
 hotlinkFeatureImage = true
 
 [header]
@@ -23,7 +23,7 @@ hotlinkFeatureImage = true
 
 [homepage]
   layout = "background"
-  homepageImage = "img/background.svg"
+  homepageImage = "img/background.webp"
   showRecent = true
   showRecentItems = 5
   showMoreLink = false
