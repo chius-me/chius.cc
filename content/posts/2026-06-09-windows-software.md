@@ -50,15 +50,19 @@ Windows Terminal 是微软官方推出的一个终端应用，我选用这个的
 
 ### [Tailscale](https://tailscale.com/)
 
+打洞能力特别强的一款 WireGuard VPN 软件，出门在外，能够很方便的回家。
+
 ### [Netbird](https://netbird.io/)
 
-### [微软远程桌面连接](https://learn.microsoft.com/zh-cn/windows-server/remote/remote-desktop-services/remotepc/remote-desktop-allow-access)
+和 Tailscale 热度相当的同类软件，但可以将控制层面自托管在我们自己的 VPS 上，这样就打洞失败的时候就可以直接走我们的 VPS 来中转。
 
-### [Aseprite](https://www.aseprite.org/)
+### [微软远程桌面连接](https://learn.microsoft.com/zh-cn/windows-server/remote/remote-desktop-services/remotepc/remote-desktop-allow-access)
 
 ### [OBS Studio](https://obsproject.com/)
 
 ### [VLC Media Player](https://www.videolan.org/vlc/)
+
+开源的媒体播放器，什么都能播。
 
 ### [Cap](https://cap.so/)
 
