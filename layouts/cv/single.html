@@ -1,0 +1,16 @@
+{{ define "main" }}
+  <article class="max-w-full">
+    <header id="single_header" class="mt-5 max-w-prose">
+      {{ if .Params.showBreadcrumbs | default (site.Params.article.showBreadcrumbs | default false) }}
+        {{ partial "breadcrumbs.html" . }}
+      {{ end }}
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        {{ .Title | emojify }}
+      </h1>
+    </header>
+
+    <section class="mt-8 max-w-full">
+      {{ .Content }}
+    </section>
+  </article>
+{{ end }}

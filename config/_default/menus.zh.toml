@@ -37,7 +37,5 @@
 
 [[main]]
   name = "简历"
-  url = "/cv.pdf"
+  pageRef = "cv"
   weight = 50
-  [main.params]
-    target = "_blank"
