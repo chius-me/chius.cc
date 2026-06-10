@@ -35,7 +35,7 @@ jobs:
       - name: Install RenderCV and fonts
         run: |
           python -m pip install --upgrade pip
-          pip install "rendercv[full]==2.8"
+          pip install "rendercv[full]==2.8" "pypdf==6.1.2"
           sudo apt-get update -qq
           sudo apt-get install -y -qq fonts-wqy-zenhei
 
@@ -44,6 +44,7 @@ jobs:
           cd cv
           rendercv render cv-zh.yaml --output-folder rendercv_output
           cd ..
+          python cv/set_pdf_metadata.py cv/rendercv_output/Yao_Chius_CV.pdf cv/rendercv_output/Yao_Chius_CV.pdf
           mkdir -p static
           cp cv/rendercv_output/Yao_Chius_CV.pdf static/cv.pdf
 

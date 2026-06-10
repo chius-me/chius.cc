@@ -8,7 +8,7 @@ title = "Blogus Chii"
   displayName = "中文"
   isoCode = "zh-cn"
   rtl = false
-  dateFormat = "2006年1月2日"
+  dateFormat = "2006-01-01"
   description = "Chius 的博客"
 
 [params.author]
@@ -17,7 +17,7 @@ title = "Blogus Chii"
   headline = "我们所度过的每个平凡的日常 也许就是连续发生的奇迹"
 
   [[params.author.links]]
-    envelope = "mailto:contact@chius.cc"
+    envelope = "mailto:me@chius.cc"
   [[params.author.links]]
     github = "https://github.com/chius-me"
   [[params.author.links]]

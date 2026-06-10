@@ -74,7 +74,7 @@
           {{ .Name | markdownify }}
         </span>
         {{ if eq .Params.target "_blank" }}
-          <span class="text-neutral-400 text-sm align-top">↗</span>
+          {{ partial "external-link-icon.html" . }}
         {{ end }}
         {{ if .HasChildren }}
           <label
@@ -109,7 +109,7 @@
                     {{ .Name | markdownify }}
                   </span>
                   {{ if eq .Params.target "_blank" }}
-                    <span class="text-neutral-400 text-xs align-top">↗</span>
+                    {{ partial "external-link-icon.html" . }}
                   {{ end }}
                 </a>
               {{ end }}

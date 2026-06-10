@@ -52,7 +52,7 @@
             tabindex="0"
           {{ end }}
           {{ with or .Name .Pre }}aria-label="{{ . }}"{{ end }}
-          class="flex items-center text-base font-medium bf-icon-color-hover"
+          class="group flex items-center text-base font-medium bf-icon-color-hover"
           title="{{ .Title }}">
           {{ if .Pre }}
             <span {{ if and .Pre .Name }}class="mr-1"{{ end }}>
@@ -63,7 +63,7 @@
             {{ .Name | markdownify }}
           </span>
           {{ if eq .Params.target "_blank" }}
-            <span class="ml-1 text-xs opacity-70">↗</span>
+            {{ partial "external-link-icon.html" . }}
           {{ end }}
           <span>
             {{ partial "icon.html" "chevron-down" }}
@@ -80,7 +80,7 @@
                   target="_blank"
                 {{ end }}
                 {{ with or .Name .Pre }}aria-label="{{ . }}"{{ end }}
-                class="flex items-center bf-icon-color-hover">
+                class="group flex items-center bf-icon-color-hover">
                 {{ if .Pre }}
                   <span {{ if and .Pre .Name }}class="mr-1"{{ end }}>
                     {{ partial "icon.html" .Pre }}
@@ -90,7 +90,7 @@
                   {{ .Name | markdownify }}
                 </span>
                 {{ if eq .Params.target "_blank" }}
-                  <span class="ml-1 text-xs opacity-70">↗</span>
+                  {{ partial "external-link-icon.html" . }}
                 {{ end }}
               </a>
             {{ end }}
@@ -104,7 +104,7 @@
       {{ if or (strings.HasPrefix .URL "http:" ) (strings.HasPrefix .URL "https:" ) (eq .Params.target "_blank") }}
         target="_blank"
       {{ end }}
-      class="flex items-center bf-icon-color-hover"
+      class="group flex items-center bf-icon-color-hover"
       {{ with or .Name .Pre }}aria-label="{{ . }}"{{ end }}
       title="{{ .Title }}">
       {{ if .Pre }}
@@ -118,7 +118,7 @@
         </span>
       {{ end }}
       {{ if eq .Params.target "_blank" }}
-        <span class="ml-1 text-xs opacity-70">↗</span>
+        {{ partial "external-link-icon.html" . }}
       {{ end }}
     </a>
   {{ end }}
