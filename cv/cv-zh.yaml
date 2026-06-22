@@ -58,20 +58,12 @@ cv:
           - "通过 WireGuard 构建覆盖移动设备、HomeLab、AWS 及阿里云的私有网络，通过 Cloudflare 对外暴露服务。"
           - "TrueNAS 配置 ZFS RAIDZ1 保障数据安全，部署 MinIO 提供 S3 兼容对象存储。"
           - "以 Forgejo 为内网 Git 中枢，Forgejo Actions + ArgoCD 对接 Kubernetes，实现 GitOps 全自动交付。"
-      - name: AI OPC 系列 ( 一人公司 )
-        highlights:
-          - "内网部署 Hermes Agent 集群( 3个 )，其一负责日常问答和各种实验、其一负责文章编写、其一负责项目辅助开发，实现个人工作流 AI 自动化。"
-          - '构建 Multica 多 Agent 框架，以 opencode 为 runtime，通过 Skill 组合赋予 Agent 不同角色，组成虚拟开发团队协同完成项目。 — #link("https://multica.lan.tamochi.cn/")[site]'
       - name: Serverless 系列
         highlights:
           - 'uptime-worker: Serverless 服务可用性监控 — #link("https://github.com/chius-me/uptime-worker")[repo]'
           - 'favicon-fisher: Favicon 抓取 Web 服务 — #link("https://github.com/chius-me/favicon-fisher")[repo]'
           - 'whoami: curl whoami.chius.cc 展示终端电子名片 — #link("https://github.com/chius-me/whoami")[repo]'
-          - 'chius.cc: 个人博客，使用 Hugo 构建，动态加载我的 Memos 站点 和 Fediverse 站点 — #link("https://github.com/chius-me/chius.cc")[repo]'
-      - name: CI/CD 容器镜像系列
-        highlights:
-          - 'cloudflare-deploy: 预装 wrangler 的 node 容器镜像 — #link("https://github.com/chius-me/cloudflare-deploy")[repo]'
-          - 'alpine-pro: 加强版 alpine 容器镜像，用于 Forgejo 跑基础 CD 任务 — #link("https://github.com/chius-me/alpine-pro")[repo]'
+          - 'chius.cc: 个人博客，使用 Hugo 构建，动态加载我的 Fediverse 站点 — #link("https://github.com/chius-me/chius.cc")[repo]'
 
     比赛经历:
       - name: 全国大学生集成电路创新创业大赛（算能杯）
