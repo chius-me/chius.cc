@@ -5,7 +5,7 @@ cv:
   photo: avatar-circle.png
   email: career@chius.cc
   custom_connections:
-    - fontawesome_icon: blog
+    - fontawesome_icon: globe
       placeholder: "chius.cc"
       url: https://chius.cc/
     - fontawesome_icon: github
