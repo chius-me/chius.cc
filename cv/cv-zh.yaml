@@ -29,10 +29,10 @@ cv:
       - company: 亿纬锂能
         position: IT 部门
         location: 惠州 广东
-        start_date: 2026-07
+        start_date: 2026-08
         end_date: present
         highlights:
-          - "管理公司云资产，日常服务器运维。"
+          - "预计于2026年8月入职。"
 
     技术能力:
       - label: 编程语言
@@ -60,16 +60,21 @@ cv:
           - "以 Forgejo 为内网 Git 中枢，Forgejo Actions + ArgoCD 对接 Kubernetes，实现 GitOps 全自动交付。"
       - name: Serverless 系列
         highlights:
+          - 'ilist: 依托于 Cloudflare 的网盘代理 — #link("https://github.com/chius-me/ilist")[repo]'
           - 'uptime-worker: Serverless 服务可用性监控 — #link("https://github.com/chius-me/uptime-worker")[repo]'
+          - 'chius.cc: 个人博客，使用 Hugo 构建，动态加载我的 Fediverse 站点 — #link("https://github.com/chius-me/chius.cc")[repo]'
           - 'favicon-fisher: Favicon 抓取 Web 服务 — #link("https://github.com/chius-me/favicon-fisher")[repo]'
           - 'whoami: curl whoami.chius.cc 展示终端电子名片 — #link("https://github.com/chius-me/whoami")[repo]'
-          - 'chius.cc: 个人博客，使用 Hugo 构建，动态加载我的 Fediverse 站点 — #link("https://github.com/chius-me/chius.cc")[repo]'
 
     比赛经历:
       - name: 全国大学生集成电路创新创业大赛（算能杯）
         date: 2026
         highlights:
-          - "作品《基于 AMP 实时架构的反馈式导盲杖 —— Globi-V》，队长，负责 AI 模型训练、端侧移植与 Flutter 客户端开发。"
+          - '作品《基于 AMP 实时架构的反馈式导盲杖 —— Globi-V》，队长，负责模型测试、端侧TPU移植、核间通信与 Flutter 客户端开发 — #link("https://github.com/chius-me/globi-app")[globi-app] — #link("https://github.com/chius-me/globi-server")[globi-server]'
+      - name: 全国大学生嵌入式芯片与系统设计竞赛安路赛道
+        date: "2025"
+        highlights:
+          - '队长，负责 Verilog 逻辑代码编写和功能测试 — #link("https://github.com/chius-me/anlogic-audio")[anlogic-audio]'
       - name: 大学生创新创业大赛
         date: "2024 – 2026"
         highlights:
