@@ -74,9 +74,11 @@ cv:
           - 'chius.cc: 基于 Hugo 与 Cloudflare Workers 构建个人网站，聚合技术文章、履历与 Fediverse 内容 — #link("https://github.com/chius-me/chius.cc")[#fa-icon("github", size: 0.9em)] · #link("https://chius.cc")[chius.cc]'
 
     团队项目:
-      - name: 嵌入式系统项目
+      - name: Globi-V 反馈式导盲系统
+        date: "2026"
         highlights:
-          - "团队项目，具体内容待补充。"
+          - "面向视障用户构建嵌入式辅助系统，集成 Milk-V DuoS 道路视觉感知、Flutter 移动端与 FastAPI 服务端。"
+          - '队长，负责模型测试、TPU 端侧部署、核间通信及 Flutter 客户端开发 — #link("https://github.com/chius-me/globi-v")[globi-v] · #link("https://github.com/chius-me/globi-app")[globi-app] · #link("https://github.com/chius-me/globi-server")[globi-server]'
 
 locale:
   language: mandarin_chinese
