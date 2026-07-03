@@ -21,7 +21,7 @@ cv:
         degree: 工学学士
         location: 青岛, 中国
         start_date: 2023-09
-        end_date: present
+        end_date: 2027-06
         highlights:
           - "核心课程：C/C++、信号与系统、数字电子技术、计算机网络、数据结构、Linux 嵌入式、人工智能模型与算法"
 
@@ -31,8 +31,8 @@ cv:
         location: 惠州 广东
         start_date: 2026-07
         end_date: 2026-10
-        highlights:
-          - "已获录用，2026年7月21日入职。"
+#        highlights:
+#          - "已获录用，2026年7月21日入职。"
 
     比赛经历:
       - name: 全国大学生集成电路创新创业大赛（算能杯）
@@ -66,12 +66,20 @@ cv:
         highlights:
           - "基于 Proxmox VE 搭建家庭数据中心，运行 20 余台虚拟机与上百个容器，承载代码托管、应用部署及数据存储服务。"
           - "使用 WireGuard 打通移动设备、HomeLab、AWS 及阿里云，构建覆盖本地基础设施与公有云的混合云网络架构。"
+          - "使用 TrueNAS 与 ZFS RAIDZ2 构建集中存储，并部署 MinIO 提供 S3 兼容对象存储服务。"
           - "以 Forgejo 为 Git 中枢，结合 Forgejo Actions 与 Argo CD 将应用自动部署至 Kubernetes，实现 GitOps 自动化交付。"
       - name: Serverless 系列
         highlights:
           - 'ilist: 基于 Cloudflare Workers 的多存储文件管理平台，支持 OneDrive、Google Drive 与 S3 — #link("https://github.com/chius-me/ilist")[#fa-icon("github", size: 0.9em)] · #link("https://ilist.chius.workers.dev")[ilist.chius.workers.dev]'
           - 'uptime-worker: 基于 Cloudflare Workers 的可用性监控平台，支持 HTTP/TCP 探测与故障告警 — #link("https://github.com/chius-me/uptime-worker")[#fa-icon("github", size: 0.9em)] · #link("https://status.chius.cc")[status.chius.cc]'
           - 'chius.cc: 基于 Hugo 与 Cloudflare Workers 构建个人网站，聚合技术文章、履历与 Fediverse 内容 — #link("https://github.com/chius-me/chius.cc")[#fa-icon("github", size: 0.9em)] · #link("https://chius.cc")[chius.cc]'
+          - 'qbittorrent-bot: 使用 Go 开发 Telegram 下载管理机器人，支持磁力链、种子任务控制与完成通知 — #link("https://github.com/chius-me/qbittorrent-bot")[#fa-icon("github", size: 0.9em)]'
+      - name: AI Agent 工程实践
+        date: 2025 – present
+        highlights:
+          - "持续使用 Codex、opencode 与 Hermes Agent 完成需求拆解、代码实现、测试验证和代码审查。"
+          - "通过 Multica 将编码 Agent 接入任务看板与本地运行时，实现任务分派、进度跟踪和多 Agent 协作。"
+          - "编写与复用 Agent Skills 固化开发流程，并通过 MCP 接入外部工具与数据源，扩展 Agent 的上下文和执行能力。"
 
     团队项目:
       - name: Globi-V 反馈式导盲系统
@@ -86,6 +94,7 @@ locale:
 design:
   theme: engineeringresumes
   page:
+    size: a4
     top_margin: 0.4in
     bottom_margin: 0.45in
     left_margin: 0.55in
