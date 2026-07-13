@@ -13,6 +13,12 @@ layoutBackgroundHeaderSpace: false
 
 我是 Chius，一名 UPC 在读本科生，同时也是开发者、Homelabber 和 Linux 爱好者。
 
+## 我的其他站点
+
+[status.chius.cc](https://status.chius.cc/) 这是我的监控站点，依托于 Cloudflare。  
+[social.chius.cc](https://social.chius.cc/@chius) 这是我的 [Fediverse] ,去中心化的社交网络平台。  
+[ilist](https://ilist.chius.workers.dev/) 这是我的公开资源分享站点，挂载了我的 onedrive 和 google drive。
+
 ## 关于这个博客
 
 本站基于 [Hugo](https://gohugo.io/) 和 [Blowfish](https://blowfish.page/) 主题构建，托管于 [Cloudflare](https://www.cloudflare.com/)。
