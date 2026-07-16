@@ -68,7 +68,6 @@ echo 4 > /sys/class/backlight/nvidia_wmi_ec_backlight/bl_power
 # /etc/systemd/system/mars-power-tune.service
 [Unit]
 Description=Mars idle power tuning
-After=multi-user.target
 
 [Service]
 Type=oneshot
@@ -102,7 +101,6 @@ Jupiter 使用 `intel_pstate`，CPU 调整方式与 Mars 相同：
 # /etc/systemd/system/jupiter-power-tune.service
 [Unit]
 Description=Jupiter idle power tuning
-After=multi-user.target
 
 [Service]
 Type=oneshot
