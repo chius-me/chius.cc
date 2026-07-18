@@ -30,9 +30,9 @@ cv:
         position: IT 部门实习生
         location: 惠州 广东
         start_date: 2026-07
-        end_date: 2026-10
-#        highlights:
-#          - "已获录用，2026年7月21日入职。"
+        end_date: 2026-09
+        highlights:
+          - "协助维护公司物理服务器和云端集群，参与公司devops的工作。"
 
     比赛经历:
       - name: 全国大学生集成电路创新创业大赛（算能杯）
@@ -48,7 +48,7 @@ cv:
       - label: 编程语言
         details: Shell, Go, Python, C, TypeScript
       - label: 开发工具
-        details: Vim, Git, Docker, GitHub Actions
+        details: Vim, Git, Docker, GitHub Actions, Supabase
       - label: AI Agent
         details: Codex, opencode, Hermes Agent, Multica
       - label: Selfhost
