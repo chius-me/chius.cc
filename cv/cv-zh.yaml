@@ -50,7 +50,7 @@ cv:
       - label: 开发工具
         details: Vim, Git, Docker, GitHub Actions, Supabase
       - label: AI Agent
-        details: Codex, opencode, Hermes Agent, Multica
+        details: Codex, Hermes Agent, Multica, Grok Build, opencode
       - label: Selfhost
         details: Forgejo, ArgoCD, Kubernetes, Proxmox VE, TrueNAS
       - label: SaaS / PaaS
@@ -70,7 +70,7 @@ cv:
           - "以 Forgejo 为 Git 中枢，结合 Forgejo Actions 与 Argo CD 将应用自动部署至 Kubernetes，实现 GitOps 自动化交付。"
       - name: Serverless 系列
         highlights:
-          - 'ilist: 基于 Cloudflare Workers 的多存储文件管理平台，支持 OneDrive、Google Drive 与 S3 — #link("https://github.com/chius-me/ilist")[#fa-icon("github", size: 0.9em)] · #link("https://ilist.chius.workers.dev")[ilist.chius.workers.dev]'
+          - 'ilist: 基于 Cloudflare Workers 的多存储文件管理平台，支持 OneDrive、Google Drive 与 S3 — #link("https://github.com/chius-me/ilist")[#fa-icon("github", size: 0.9em)] · #link("https://ilist.chius.cc")[ilist.chius.cc]'
           - 'uptime-worker: 基于 Cloudflare Workers 的可用性监控平台，支持 HTTP/TCP 探测与故障告警 — #link("https://github.com/chius-me/uptime-worker")[#fa-icon("github", size: 0.9em)] · #link("https://status.chius.cc")[status.chius.cc]'
           - 'chius.cc: 基于 Hugo 与 Cloudflare Workers 构建个人网站，聚合技术文章、履历与 Fediverse 内容 — #link("https://github.com/chius-me/chius.cc")[#fa-icon("github", size: 0.9em)] · #link("https://chius.cc")[chius.cc]'
           - 'qbittorrent-bot: 使用 Go 开发 Telegram 下载管理机器人，支持磁力链、种子任务控制与完成通知 — #link("https://github.com/chius-me/qbittorrent-bot")[#fa-icon("github", size: 0.9em)]'
