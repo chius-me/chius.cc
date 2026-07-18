@@ -1,40 +1,22 @@
 ---
-title: "给两台 PVE 主机降功耗：一次 HomeLab 节能优化实录"
+title: "给 HomeLab 降降功耗"
 date: 2026-07-18T00:00:00+08:00
 draft: false
 tags: ["HomeLab", "Proxmox VE", "节能", "UPS"]
 ---
-## 为什么要折腾功耗
+最近看了一眼 UPS，家里这套东西加起来已经快 200W 了。
 
-我家里目前有四台长期在线的物理设备：运行 OpenWrt 的 Sol、运行 TrueNAS 的 Saturn，以及两台 Proxmox VE 主机 Mars 和 Jupiter。Mars 是一台带 RTX 4060 的游戏本，Jupiter 则是一台装有多块 NVMe、万兆网卡和 Tesla P4 的台式机。
+现在一共有四台物理机：OpenWrt 软路由 Sol、TrueNAS Saturn，还有两台 PVE，Mars 和 Jupiter。光看数量好像也不算特别夸张，但这些机器一天到晚开着，200W 就有点肉疼了，房间里还会多一个稳定的热源。
 
-整套 HomeLab 的功耗一度接近 200W。这个数字放在机房里不算什么，但放在家里 24 小时运行，一年就是大约 1750 度电，还会变成持续的热量和风扇噪声。所以我决定从最容易控制的两台 PVE 主机开始排查。
+反正先关机再说。
 
-这次优化最后得到的不是一个“神奇参数”，而是一套很朴素的方法：先建立基线，再一次只改变一个变量，最后一定要重启验证。
+## 先看 Mars
 
-## 先搞清楚 UPS 的数字
+我先关掉 Jupiter，又把 Mars 也关掉。此时 UPS 上只剩光猫、AP、Sol 和 Saturn，负载是 17%。
 
-我的 APC UPS 标称有功功率是 390W，NUT 暴露的 `ups.load` 是整数百分比。因此可以粗略认为：
+再打开 Mars，读数开始在 23% 到 29% 之间跳。一台没有运行任何 VM 的笔记本搁那吃掉几十瓦，感觉不太对。
 
-\[
-1\% \approx 3.9\text{W}
-\]
-
-例如 31% 大约对应 121W。不过这只是整套 UPS 下游设备的估算值，里面还包括光猫、AP、软路由和 NAS，并不是某一台 PVE 的功耗。
-
-```bash
-upsc ups@nas.local ups.load
-```
-
-另外，UPS 数据大约每 30 秒才刷新一次。刚关闭一个 VM 时，读数可能不降反升；连续采样几分钟后才能看到真实趋势。后面的每个结论，我都尽量结合三类信息判断：UPS 负载、宿主机实时 CPU，以及 RAPL 的 CPU Package 功耗。
-
-RAPL 只统计处理器封装，也不能当作墙上功耗。主板、内存、硬盘、网卡和显卡都不在这个数字里。
-
-## 先优化 Mars：一台带独显的 PVE 笔记本
-
-只保留 Sol、光猫、AP 和 Saturn 时，UPS 负载约为 17%。最初打开 Mars 后，读数会来到 23% 到 29%。对于一台没有运行来宾的笔记本，这显然偏高。
-
-Mars 使用 `amd-pstate-epp`。我把所有 CPU policy 从 `performance` 改成 `powersave`，并把 Energy Performance Preference 改为 `balance_power`：
+Mars 是一台带 RTX 4060 的游戏本。CPU 用的是 `amd-pstate-epp`，重启后默认跑在 `performance`。先把所有 policy 调成 `powersave + balance_power`：
 
 ```bash
 for p in /sys/devices/system/cpu/cpufreq/policy*; do
@@ -43,26 +25,22 @@ for p in /sys/devices/system/cpu/cpufreq/policy*; do
 done
 ```
 
-这里的 `powersave` 并不是把 CPU 锁死在最低频率。对于 `amd-pstate-epp` 和 `intel_pstate`，CPU 仍然会根据负载升频，只是空闲和轻载时不再一直偏向最高性能。
+名字虽然叫 `powersave`，但有负载时还是会正常升频，不是把 CPU 锁死在最低频率。
 
-Mars 的 RTX 4060 平时不需要由宿主机使用，所以让 PCIe 设备进入 Runtime PM：
+4060 平时直通给 Windows，需要的时候再开 VM。VM 没开时，让宿主机把显卡挂起：
 
 ```bash
 echo auto > /sys/bus/pci/devices/0000:01:00.0/power/control
 cat /sys/bus/pci/devices/0000:01:00.0/power/runtime_status
 ```
 
-空闲时应当看到 `suspended`。如果把 4060 直通给 Windows VM，VM 启动后显卡会变成 `active`；关闭 VM 后，它才能再次休眠。这正好实现“随开随用”，但显卡被 VM 占用期间的功耗无法由宿主机消除。
-
-最后把笔记本内屏背光关掉：
+状态很快变成了 `suspended`。最后再关掉笔记本自己的屏幕背光：
 
 ```bash
 echo 4 > /sys/class/backlight/nvidia_wmi_ec_backlight/bl_power
 ```
 
-不同笔记本的背光设备路径可能不同，需要先查看 `/sys/class/backlight/`。
-
-为了让设置在重启后继续生效，我建立了下面的服务：
+这些东西手动敲一遍当然有用，但重启就没了，于是加了一个 systemd 服务：
 
 ```ini
 # /etc/systemd/system/mars-power-tune.service
@@ -85,17 +63,19 @@ systemctl daemon-reload
 systemctl enable --now mars-power-tune.service
 ```
 
-优化后 Mars 开机、没有运行来宾时，整套 UPS 仍维持在 17% 到 18%。这不代表 Mars 的功耗是零，只能说明它的增量已经接近 UPS 整数读数的分辨率。
+做完以后，Mars 开机但不运行来宾时，UPS 还是 17% 到 18%。当然不可能真的是零功耗，只是变化已经小到 UPS 的整数读数不太看得出来了。
 
-## 再看 Jupiter：先测宿主机，再测来宾
+这里也被 UPS 坑了几次。它大概几十秒才刷新一次，刚关掉一个东西，数字可能不降反升。我的 UPS 标称有功功率是 390W，1% 差不多是 3.9W，但这个百分比只能拿来看整套设备的大概趋势，没法精确算出某个 VM 吃了几瓦。
 
-Jupiter 的情况复杂得多。我先关闭全部 VM 和 LXC，只测宿主机，然后逐个启动来宾并等待读数稳定。
+## Jupiter 就没这么简单了
 
-纯宿主机状态下，CPU Package 最低约 6.1W；但 UPS 增量仍明显高于这个数字。检查 PCIe 链路后发现，Tesla P4、使用 MAP1602 控制器的 NVMe、ConnectX-3 网卡等设备缺少理想的 ASPM 省电状态，再加上多块 NVMe，这些硬件构成了无法靠 CPU 调频消除的功耗下限。
+Jupiter 不是笔记本，里面塞了 Tesla P4、ConnectX-3、好几块 NVMe，还有两块傲腾拿来做 swap。我先把所有 VM 和 LXC 都关掉，只留 PVE 宿主机。
 
-逐个启动全部来宾后，CPU Package 从约 6.1W 上升到约 12.6W，整套 UPS 稳态通常只增加几个百分点。这说明“大量空闲 VM/LXC”确实有成本，但不是最初接近 200W 的唯一解释。真正昂贵的是来宾里面的实际任务，以及被唤醒的直通硬件。
+CPU Package 最低能到 6.1W，不过整机显然不止这些。P4、MAP1602 主控的 NVMe、ConnectX-3 都没有很理想的 ASPM 状态，主板、内存和一堆 PCIe 设备的功耗也不在 RAPL 里面。Jupiter 纯宿主机开着时，整套 UPS 已经到了 30% 左右。
 
-Jupiter 使用 `intel_pstate`，CPU 调整方式与 Mars 相同：
+接下来我把 VM 和 LXC 一个个打开，每开一个就等 UPS 刷新。全部来宾空闲挂着时，CPU Package 大概 12.6W，UPS 多数时间在 31% 到 33%。所以这些空闲来宾确实会吃一点，但没有我一开始想得那么夸张。
+
+Jupiter 用的是 `intel_pstate`，CPU 部分和 Mars 一样。我也给它放了一个开机服务：
 
 ```ini
 # /etc/systemd/system/jupiter-power-tune.service
@@ -116,48 +96,32 @@ systemctl daemon-reload
 systemctl enable --now jupiter-power-tune.service
 ```
 
-我没有把关闭睿频写进这套通用配置。是否限制最高性能需要根据业务延迟和峰值性能单独决定，不能因为追求一个更低的空载数字就一刀切。
+我没有顺手把睿频也关掉。平时没活的时候降下来就行，真有任务时还是希望它赶紧跑完。
 
-## 为什么重启后突然冲到 50% 甚至 60%
+## 重启以后怎么反而 50% 了
 
-持久化调频后，我重启了 Jupiter。UPS 不但没有立刻下降，反而冲到了 50% 以上，后续联合重启 Mars 和 Jupiter 时还出现过 60% 的峰值。
+持久化以后重启 Jupiter，UPS 直接冲到了 50% 多。
 
-一开始我怀疑是优化脚本或者残留进程，但完整检查后没有发现自定义定时任务、测量脚本或后台循环。真正的问题是：Jupiter 上几乎全部来宾都配置了 `onboot: 1`，开机时 14 个 VM 和 7 个 LXC 同时启动。
+我第一反应是前面测试时是不是扔了一堆脚本在宿主机上，甚至把 `/root`、`/tmp`、systemd unit 和 crontab 都翻了一遍。最后什么都没找到，也没有残留的测量进程。
 
-那一刻并不存在所谓“空载”：Windows、EVE-NG 和其他大量 VM/LXC 都在做初始化。EVE-NG 启动时一度占满 8 个核心，宿主机侧看到约 800% CPU；Windows 也会同时唤醒直通的 Tesla P4。
+再看 PVE，原因其实很朴素：几乎所有来宾都是 `onboot: 1`。宿主机起来以后，14 个 VM 和 7 个 LXC 一窝蜂启动，根本不是什么“空载”。Windows 在启动，直通的 P4 也跟着变成 `active`；EVE-NG 最夸张的时候占了接近 800% CPU。
 
-期间还遇到过一次很隐蔽的异常：duo 在启动时报告某个 vCPU 唤醒失败。虚拟机内部对应 CPU 离线，看起来几乎空闲，但宿主机上的 KVM vCPU 线程一直占满一个核心。关闭 duo 后，CPU Package 从约 31W 降到了约 22W。下一次重启时它的 6 个 vCPU 又全部正常上线，异常没有复现。
+中间还碰到一个比较神秘的问题。duo 启动时有一个 vCPU 没唤醒成功，虚拟机里面对应的 CPU 是离线的，看起来已经闲下来了，但宿主机上的 KVM 线程一直占满一个核心。
 
-这也说明，判断虚拟机功耗不能只看来宾内部的 `top`。至少要同时看宿主机上的 KVM 线程：
+当时 `ps` 里 duo 一度显示 500% 左右，我后来才发现那是从启动到现在的累计平均值。用 `top -H` 看线程，真正还在烧的是 `CPU 1/KVM`：
 
 ```bash
-top -H -p "$(cat /var/run/qemu-server/VMID.pid)"
+top -H -p "$(cat /var/run/qemu-server/189.pid)"
 ```
 
-对于 EVE-NG 这类实验环境、带 GPU 的 Windows，以及不需要全天运行的开发集群，更合理的做法是取消自动启动或配置启动延迟，而不是让所有来宾在宿主机开机后争抢资源。
+关掉 duo 后，CPU Package 从 31W 左右掉到了 22W。下一次重启它又正常了，6 个 vCPU 全部在线，这个问题暂时没有复现。
 
-## 最终结果
+## 暂时先这样
 
-下面的 UPS 百分比都是整套设备读数，按 390W 标称有功功率换算的瓦数只用于帮助理解量级。
+最后我把 Mars 和 Jupiter 一起重启，又盯了十分钟 UPS。
 
-| 阶段 | UPS 负载 | 近似整套功耗 | 说明 |
-| --- | ---: | ---: | --- |
-| Sol、光猫、AP、Saturn，加优化后的空闲 Mars | 17%–18% | 66W–70W | Mars 的 4060 已休眠 |
-| Jupiter 宿主机上线、来宾关闭 | 约 30% | 约 117W | PCIe 和多块 NVMe 构成硬件下限 |
-| Jupiter 全部来宾启动后的稳态 | 31%–34% | 121W–133W | CPU Package 最终约 12W |
-| Mars 与 Jupiter 同时重启的启动峰值 | 60% | 约 234W | 14 个 VM 和 7 个 LXC 同时初始化 |
+刚开始所有来宾一起启动，峰值到过 60%，差不多是 234W。后面一路从 56%、48%、40% 往下掉，最后连续几次停在 31% 左右。Jupiter 的 CPU Package 这时大约 12W，Mars 的 4060 也重新回到了 `suspended`。
 
-联合重启后，我以 20 秒间隔监控了约 10 分钟。UPS 从 60% 逐步回落到 56%、48%、40%，最后连续稳定在 31% 左右；两台机器的 `powersave + balance_power` 都在重启后自动恢复，Mars 的 4060 也回到了 `suspended`。
+现在日常稳态大概就是 31% 到 34%，比最开始好不少。启动时那一大坨峰值还在，不过调频解决不了 21 个来宾同时开机。之后准备把 Windows、EVE-NG 和 duo 改成按需启动，剩下的再排一下 `onboot` 顺序。
 
-因此，这一轮优化解决了长期空闲时的浪费，但没有、也不应该消灭启动和实际业务带来的峰值。下一步如果还要继续优化，重点会是给重型来宾设置启动顺序，并把 Windows、EVE-NG 和实验集群改成真正的按需启动。
-
-## 这次排查留下的经验
-
-1. **不要相信单次 UPS 读数。** 先确认刷新周期，连续采样，再比较稳定平台。
-2. **不要混用测量口径。** UPS 是整套设备，RAPL 只是 CPU Package，`top` 只说明计算负载。
-3. **空载 VM 不等于没有成本，但实际任务更重要。** 与其纠结每个空闲来宾的一两瓦，不如先找持续占满核心和唤醒显卡的任务。
-4. **省电配置必须经过重启验证。** 手动 `echo` 生效不代表下次开机仍然生效，systemd oneshot 服务简单而可靠。
-5. **独立显卡适合按需直通。** 不用时让 VM 关闭、显卡 Runtime Suspend；需要时再启动 VM。
-6. **开机峰值要靠调度解决。** 调频策略不能解决 21 个来宾同时初始化，应该使用启动延迟或取消不必要的 `onboot`。
-
-HomeLab 降功耗并不是把所有设备都限制在最低性能，而是让“没有工作的时候真正休息，有工作的时候正常干活”。这比追求某个漂亮但不可持续的瞬时数字更有意义。
+这次先折腾到这里。
