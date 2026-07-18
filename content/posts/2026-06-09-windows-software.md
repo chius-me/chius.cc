@@ -58,7 +58,11 @@ Windows Terminal 是微软官方推出的一个终端应用，我选用这个的
 
 ### [微软远程桌面连接](https://learn.microsoft.com/zh-cn/windows-server/remote/remote-desktop-services/remotepc/remote-desktop-allow-access)
 
+系统自带的 RDP 客户端，配合 Tailscale / Netbird 回家连 Windows 机器，延迟低、画面也够用，不折腾第三方就够了。
+
 ### [OBS Studio](https://obsproject.com/)
+
+开源的录屏 / 推流软件。录课、录 Demo、偶尔直播都靠它，场景和来源配置灵活，免费且够强。
 
 ### [VLC Media Player](https://www.videolan.org/vlc/)
 
@@ -74,11 +78,21 @@ Windows Terminal 是微软官方推出的一个终端应用，我选用这个的
 
 ### [Sumatra PDF](https://www.sumatrapdfreader.org/free-pdf-reader.html)
 
+轻量、启动快的 PDF 阅读器，打开大文件也不卡，日常看论文和文档够用。
+
 ### [Twinkle Tray](https://twinkletray.com/)
+
+托盘里直接调外接显示器亮度，不用摸屏幕按键，多屏的时候特别省事。
 
 ### [PicList](https://piclist.cn/)
 
+图床上传工具，截图或拖文件就能传到对象存储，写博客贴图很方便。
+
 ### [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)
 
+微软 Sysinternals 出品，用来查看和清理开机启动项，比系统自带的启动管理更全、更细。
+
 ### [Ventoy](https://www.ventoy.net/)
+
+把 ISO 直接丢进 U 盘就能启动安装，不用反复刷盘，装系统、进 Live 环境都省心。
 
