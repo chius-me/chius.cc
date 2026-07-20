@@ -1,12 +1,12 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
 cv:
   name: Yao Chius
-  headline: 通信工程本科生 · 软件开发者 · DevOps · HomeLabber · Linux 狂热爱好者
+  headline: 通信工程本科生 · 软件开发者 · DevOps · HomeLabber · Linux 爱好者
   photo: avatar-circle.png
   email: career@chius.cc
   custom_connections:
     - fontawesome_icon: globe
-      placeholder: "chius.cc"
+      placeholder: chius.cc
       url: https://chius.cc/
     - fontawesome_icon: github
       placeholder: GitHub
@@ -27,12 +27,12 @@ cv:
 
     实习经历:
       - company: 亿纬锂能
-        position: IT 部门实习生
-        location: 惠州 广东
+        position: Global IT 系统实施运维
+        location: 惠州, 广东
         start_date: 2026-07
         end_date: 2026-09
         highlights:
-          - "协助维护公司物理服务器和云端集群，参与公司devops的工作。"
+          - "协助维护公司物理服务器和云端集群，参与公司 DevOps 的工作。"
 
     比赛经历:
       - name: 全国大学生集成电路创新创业大赛（算能杯）
@@ -42,7 +42,7 @@ cv:
       - name: 华为 ICT 网络赛道
         date: "2025"
       - name: 大学生创新创业大赛
-        date: "2024 – 2026"
+        date: 2024 – 2026
 
     技术能力:
       - label: 编程语言
@@ -50,9 +50,9 @@ cv:
       - label: 开发工具
         details: Vim, Git, Docker, GitHub Actions, Supabase
       - label: AI Agent
-        details: Codex, Hermes Agent, Multica, Grok Build, opencode
+        details: Codex, opencode, Hermes Agent, Multica
       - label: Selfhost
-        details: Forgejo, ArgoCD, Kubernetes, Proxmox VE, TrueNAS
+        details: Forgejo, Argo CD, Kubernetes, Proxmox VE, TrueNAS
       - label: SaaS / PaaS
         details: GitHub, Cloudflare, AWS/GCP/阿里云
       - label: 英语能力
@@ -62,20 +62,21 @@ cv:
 
     个人项目:
       - name: HomeLab 混合云平台
-        date: 2024 – present
+        date: 2024-01 – present
         highlights:
           - "基于 Proxmox VE 搭建家庭数据中心，运行 20 余台虚拟机与上百个容器，承载代码托管、应用部署及数据存储服务。"
           - "使用 WireGuard 打通移动设备、HomeLab、AWS 及阿里云，构建覆盖本地基础设施与公有云的混合云网络架构。"
           - "使用 TrueNAS 与 ZFS RAIDZ2 构建集中存储，并部署 MinIO 提供 S3 兼容对象存储服务。"
           - "以 Forgejo 为 Git 中枢，结合 Forgejo Actions 与 Argo CD 将应用自动部署至 Kubernetes，实现 GitOps 自动化交付。"
       - name: Serverless 系列
+        date: 2025-12 – present
         highlights:
           - 'ilist: 基于 Cloudflare Workers 的多存储文件管理平台，支持 OneDrive、Google Drive 与 S3 — #link("https://github.com/chius-me/ilist")[#fa-icon("github", size: 0.9em)] · #link("https://ilist.chius.cc")[ilist.chius.cc]'
           - 'uptime-worker: 基于 Cloudflare Workers 的可用性监控平台，支持 HTTP/TCP 探测与故障告警 — #link("https://github.com/chius-me/uptime-worker")[#fa-icon("github", size: 0.9em)] · #link("https://status.chius.cc")[status.chius.cc]'
           - 'chius.cc: 基于 Hugo 与 Cloudflare Workers 构建个人网站，聚合技术文章、履历与 Fediverse 内容 — #link("https://github.com/chius-me/chius.cc")[#fa-icon("github", size: 0.9em)] · #link("https://chius.cc")[chius.cc]'
           - 'qbittorrent-bot: 使用 Go 开发 Telegram 下载管理机器人，支持磁力链、种子任务控制与完成通知 — #link("https://github.com/chius-me/qbittorrent-bot")[#fa-icon("github", size: 0.9em)]'
       - name: AI Agent 工程实践
-        date: 2025 – present
+        date: 2025-06 – present
         highlights:
           - "持续使用 Codex、opencode 与 Hermes Agent 完成需求拆解、代码实现、测试验证和代码审查。"
           - "通过 Multica 将编码 Agent 接入任务看板与本地运行时，实现任务分派、进度跟踪和多 Agent 协作。"
@@ -83,7 +84,7 @@ cv:
 
     团队项目:
       - name: Globi-V 反馈式导盲系统
-        date: "2026"
+        date: 2026-01 – 2026-07
         highlights:
           - "面向视障用户构建嵌入式辅助系统，集成 Milk-V DuoS 道路视觉感知、Flutter 移动端与 FastAPI 服务端。"
           - '队长，负责模型测试、TPU 端侧部署、核间通信及 Flutter 客户端开发 — #link("https://github.com/chius-me/globi-v")[globi-v] · #link("https://github.com/chius-me/globi-app")[globi-app] · #link("https://github.com/chius-me/globi-server")[globi-server]'
@@ -101,7 +102,7 @@ design:
     right_margin: 0.55in
     show_footer: true
   templates:
-    footer: '最新在线简历：[chius.cc/cv.pdf](https://chius.cc/cv.pdf)'
+    footer: "最新在线简历：[chius.cc/cv.pdf](https://chius.cc/cv.pdf)"
   header:
     connections:
       show_icons: true
@@ -115,11 +116,11 @@ design:
     space_between_regular_entries: 0.12cm
   typography:
     font_family:
-      body: "WenQuanYi Zen Hei"
-      name: "WenQuanYi Zen Hei"
-      headline: "WenQuanYi Zen Hei"
-      connections: "WenQuanYi Zen Hei"
-      section_titles: "WenQuanYi Zen Hei"
+      body: WenQuanYi Zen Hei
+      name: WenQuanYi Zen Hei
+      headline: WenQuanYi Zen Hei
+      connections: WenQuanYi Zen Hei
+      section_titles: WenQuanYi Zen Hei
 
 settings:
   render_command:
