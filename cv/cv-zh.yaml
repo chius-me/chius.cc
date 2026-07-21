@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
 cv:
   name: Yao Chius
-  headline: 通信工程本科生 · 软件开发者 · DevOps · HomeLabber · Linux 爱好者
+  headline: 通信工程本科生 | 嵌入式系统 · 云原生 · DevOps · HomeLabber · Linux
   photo: avatar-circle.png
   email: career@chius.cc
   custom_connections:
@@ -50,7 +50,7 @@ cv:
       - label: 开发工具
         details: Vim, Git, Docker, GitHub Actions, Supabase
       - label: AI Agent
-        details: Codex, opencode, Hermes Agent, Multica
+        details: Codex, opencode, Hermes Agent, Multica,
       - label: Selfhost
         details: Forgejo, Argo CD, Kubernetes, Proxmox VE, TrueNAS
       - label: SaaS / PaaS
@@ -60,34 +60,36 @@ cv:
       - label: 兴趣方向
         details: 自动化运维、开源软件、自托管程序
 
+    团队项目:
+      - name: 'Globi-V 多模态辅助出行系统 #link("https://github.com/chius-me/globi-v")[#fa-icon("github", size: 0.85em)] #link("https://github.com/chius-me/globi-app")[#fa-icon("github", size: 0.85em)] #link("https://github.com/chius-me/globi-server")[#fa-icon("github", size: 0.85em)]'
+        date: 2026-01 – 2026-07
+        highlights:
+          - "担任队长，牵头设计面向视障用户与家属的多端系统，协同 Milk-V Duo S 视觉端、Flutter 双模式客户端与 FastAPI 后端，覆盖道路感知、语音交互、实时定位与紧急联络。"
+          - "在 SG2000 的 512 MB 内存与 0.5 TOPS INT8 TPU 约束下，完成交通灯、人行横道/导向箭头检测及盲道分割模型的训练、TPU-MLIR 量化转换与板端验证。"
+          - "使用 C/C++ 打通 GC2083 摄像头、VI/VPSS、CVI Runtime 与 H.264 RTSP 实时链路，以零拷贝方式送入 TPU；实测 INT8 推理约 117 ms/帧，并行推流约 28 FPS。"
+          - "负责 Flutter 客户端开发，实现视障/家属双模式、45 秒定位上报、地图追踪、8 位码绑定、语音 AI 助手与 SOS，并以安全存储保护 JWT、通过 GitHub Actions 自动构建发布 APK。"
+          - "定位并修复板端头文件/ABI 不一致导致的 SIGSEGV，完善正常退出与异常中断后的 MMF 资源清理和恢复流程，提升实时链路的可重复部署能力。"
+
     个人项目:
       - name: HomeLab 混合云平台
         date: 2024-01 – present
         highlights:
-          - "基于 Proxmox VE 搭建家庭数据中心，运行 20 余台虚拟机与上百个容器，承载代码托管、应用部署及数据存储服务。"
+          - "基于 Proxmox VE 搭建家庭数据中心，运行 20 余台虚拟机与百余个容器，承载代码托管、应用部署及数据存储服务。"
           - "使用 WireGuard 打通移动设备、HomeLab、AWS 及阿里云，构建覆盖本地基础设施与公有云的混合云网络架构。"
           - "使用 TrueNAS 与 ZFS RAIDZ2 构建集中存储，并部署 MinIO 提供 S3 兼容对象存储服务。"
           - "以 Forgejo 为 Git 中枢，结合 Forgejo Actions 与 Argo CD 将应用自动部署至 Kubernetes，实现 GitOps 自动化交付。"
-      - name: Serverless 系列
-        date: 2025-12 – present
-        highlights:
-          - 'ilist: 基于 Cloudflare Workers 的多存储文件管理平台，支持 OneDrive、Google Drive 与 S3 — #link("https://github.com/chius-me/ilist")[#fa-icon("github", size: 0.9em)] · #link("https://ilist.chius.cc")[ilist.chius.cc]'
-          - 'uptime-worker: 基于 Cloudflare Workers 的可用性监控平台，支持 HTTP/TCP 探测与故障告警 — #link("https://github.com/chius-me/uptime-worker")[#fa-icon("github", size: 0.9em)] · #link("https://status.chius.cc")[status.chius.cc]'
-          - 'chius.cc: 基于 Hugo 与 Cloudflare Workers 构建个人网站，聚合技术文章、履历与 Fediverse 内容 — #link("https://github.com/chius-me/chius.cc")[#fa-icon("github", size: 0.9em)] · #link("https://chius.cc")[chius.cc]'
-          - 'qbittorrent-bot: 使用 Go 开发 Telegram 下载管理机器人，支持磁力链、种子任务控制与完成通知 — #link("https://github.com/chius-me/qbittorrent-bot")[#fa-icon("github", size: 0.9em)]'
       - name: AI Agent 工程实践
         date: 2025-06 – present
         highlights:
           - "持续使用 Codex、opencode 与 Hermes Agent 完成需求拆解、代码实现、测试验证和代码审查。"
           - "通过 Multica 将编码 Agent 接入任务看板与本地运行时，实现任务分派、进度跟踪和多 Agent 协作。"
           - "编写与复用 Agent Skills 固化开发流程，并通过 MCP 接入外部工具与数据源，扩展 Agent 的上下文和执行能力。"
-
-    团队项目:
-      - name: Globi-V 反馈式导盲系统
-        date: 2026-01 – 2026-07
+      - name: Serverless 系列
+        date: 2025-12 – present
         highlights:
-          - "面向视障用户构建嵌入式辅助系统，集成 Milk-V DuoS 道路视觉感知、Flutter 移动端与 FastAPI 服务端。"
-          - '队长，负责模型测试、TPU 端侧部署、核间通信及 Flutter 客户端开发 — #link("https://github.com/chius-me/globi-v")[globi-v] · #link("https://github.com/chius-me/globi-app")[globi-app] · #link("https://github.com/chius-me/globi-server")[globi-server]'
+          - '#link("https://github.com/chius-me/ilist")[#fa-icon("github", size: 0.9em)] ilist: 基于 Cloudflare Workers 的多存储文件管理平台，支持 OneDrive、Google Drive 与 S3 — #link("https://ilist.chius.cc")[ilist.chius.cc]'
+          - '#link("https://github.com/chius-me/uptime-worker")[#fa-icon("github", size: 0.9em)] uptime-worker: 基于 Cloudflare Workers 的可用性监控平台，支持 HTTP/TCP 探测与故障告警 — #link("https://status.chius.cc")[status.chius.cc]'
+          - '#link("https://github.com/chius-me/chius.cc")[#fa-icon("github", size: 0.9em)] chius.cc: 基于 Hugo 与 Cloudflare Workers 构建个人网站，聚合技术文章、履历与 Fediverse 内容 — #link("https://chius.cc")[chius.cc]'
 
 locale:
   language: mandarin_chinese
@@ -96,25 +98,36 @@ design:
   theme: engineeringresumes
   page:
     size: a4
-    top_margin: 0.4in
-    bottom_margin: 0.45in
-    left_margin: 0.55in
-    right_margin: 0.55in
+    top_margin: 0.25in
+    bottom_margin: 0.28in
+    left_margin: 0.45in
+    right_margin: 0.45in
     show_footer: true
   templates:
     footer: "最新在线简历：[chius.cc/cv.pdf](https://chius.cc/cv.pdf)"
   header:
+    photo_width: 3.0cm
     connections:
       show_icons: true
-    space_below_name: 0.35cm
-    space_below_headline: 0.35cm
-    space_below_connections: 0.4cm
+    space_below_name: 0.18cm
+    space_below_headline: 0.18cm
+    space_below_connections: 0.2cm
   section_titles:
-    space_above: 0.3cm
-    space_below: 0.2cm
+    space_above: 0.15cm
+    space_below: 0.08cm
   sections:
-    space_between_regular_entries: 0.12cm
+    space_between_regular_entries: 0.07cm
+  entries:
+    highlights:
+      space_above: 0.05cm
+      space_between_items: 0.05cm
   typography:
+    font_size:
+      body: 10pt
+      headline: 9.8pt
+      connections: 9.5pt
+      section_titles: 1.16em
+    line_spacing: 0.55em
     font_family:
       body: WenQuanYi Zen Hei
       name: WenQuanYi Zen Hei
