@@ -15,9 +15,9 @@ layoutBackgroundHeaderSpace: false
 
 ## 我的其他站点
 
-[status.chius.cc](https://status.chius.cc/) 这是我的监控站点，依托于 Cloudflare。  
 [social.chius.cc](https://social.chius.cc/@chius) 这是我的 [Fediverse](https://jointhefediverse.net/) ,去中心化的社交网络平台。  
-[ilist](https://ilist.chius.workers.dev/) 这是我的公开资源分享站点，挂载了我的 onedrive 和 google drive。
+[status.chius.cc](https://status.chius.cc/) 这是我的监控站点，依托于 Cloudflare。  
+[ilist.chius.cc](https://ilist.chius.workers.dev/) 这是我的公开资源分享站点，挂载了我的 onedrive 和 google drive。
 
 ## 关于这个博客
 
