@@ -19,6 +19,20 @@ jobs:
           submodules: true
           fetch-depth: 0
 
+      - name: Verify Cloudflare secrets
+        env:
+          HAS_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+          HAS_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+        run: |
+          if [ "$HAS_API_TOKEN" != "true" ]; then
+            echo "::error::Missing repository secret CLOUDFLARE_API_TOKEN. Add it under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+          if [ "$HAS_ACCOUNT_ID" != "true" ]; then
+            echo "::error::Missing repository secret CLOUDFLARE_ACCOUNT_ID. Add it under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
@@ -61,10 +75,5 @@ jobs:
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
-
-      - name: Add custom domains
-        run: |
-          npx wrangler domains add chius.cc || echo "Domain may already exist, skipping"
-          npx wrangler domains add blog.chius.cc || echo "Domain may already exist, skipping"
-          npx wrangler domains add cv.chius.cc || echo "Domain may already exist, skipping"

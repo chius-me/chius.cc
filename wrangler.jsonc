@@ -4,6 +4,14 @@
   "compatibility_date": "2024-12-18",
   "assets": {
     "directory": "public",
+    "binding": "ASSETS",
     "not_found_handling": "404-page"
-  }
+  },
+  // Custom domains for the Worker (replaces the obsolete `wrangler domains add` CLI).
+  // blog/cv hosts are redirected in src/index.js.
+  "routes": [
+    { "pattern": "chius.cc", "custom_domain": true },
+    { "pattern": "blog.chius.cc", "custom_domain": true },
+    { "pattern": "cv.chius.cc", "custom_domain": true }
+  ]
 }
