@@ -75,6 +75,11 @@ button:hover {
 	--button-border: 1px solid #FFFFFF;
 }
 
+.button-telegram {
+	--button-text: #FFFFFF;
+	--button-background: #26A5E4;
+}
+
 .button-bilibili {
 	--button-text: #ffffff;
 	--button-background: #00aeec;
