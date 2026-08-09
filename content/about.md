@@ -54,5 +54,3 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
-
-{{< spotify >}}
