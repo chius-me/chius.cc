@@ -29,6 +29,13 @@
   weight = 40
 
 [[main]]
+  name = "文件分享"
+  url = "https://ilist.chius.cc"
+  weight = 42
+  [main.params]
+    target = "_blank"
+
+[[main]]
   name = "社交链接"
   url = "/links/"
   weight = 45
