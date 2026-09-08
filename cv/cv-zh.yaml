@@ -27,20 +27,21 @@ cv:
 
     实习经历:
       - company: 亿纬锂能
-        position: Global IT 系统实施运维
+        position: 软件开发部 AI创新小组
         location: 惠州, 广东
         start_date: 2026-07
-        end_date: 2026-09
+        end_date: present
         highlights:
-          - "协助维护公司物理服务器和云端集群，参与公司 DevOps 的工作。"
+          - "使用 Dify 编写 Workflow，集成到公司原有系统，以及供公司员工使用。"
+          - "部署最新的适配华为昇腾处理器的各类大模型，压力测试，并丝滑上线生产环境"
 
     比赛经历:
       - name: 全国大学生集成电路创新创业大赛（算能杯）
-        date: "2026"
+        date: "#text[2026]"
       - name: 全国大学生嵌入式芯片与系统设计竞赛安路赛道
-        date: "2025"
+        date: "#text[2025]"
       - name: 华为 ICT 网络赛道
-        date: "2025"
+        date: "#text[2025]"
       - name: 大学生创新创业大赛
         date: 2024 – 2026
 
@@ -49,47 +50,48 @@ cv:
         details: Shell, Go, Python, C, TypeScript
       - label: 开发工具
         details: Vim, Git, Docker, GitHub Actions, Supabase
-      - label: AI Agent
-        details: Codex, opencode, Hermes Agent, Multica,
-      - label: Selfhost
-        details: Forgejo, Argo CD, Kubernetes, Proxmox VE, TrueNAS
+      - label: AI
+        details: Dify, vllm-ascend, ComfyUI, n8n, Codex, opencode, Hermes, Multica
+      - label: Infra
+        details: Forgejo, Argo CD, Kubernetes, Proxmox VE, TrueNAS, WireGuard, MinIO, Ansible
       - label: SaaS / PaaS
-        details: GitHub, Cloudflare, AWS/GCP/阿里云
+        details: GitHub, Hugging Face, Kaggle, Cloudflare, AWS/GCP/阿里云, Tailscale
       - label: 英语能力
         details: CET-6
       - label: 兴趣方向
         details: 自动化运维、开源软件、自托管程序
 
     团队项目:
-      - name: 'Globi-V 多模态辅助出行系统 #link("https://github.com/chius-me/globi-v")[#fa-icon("github", size: 0.85em)] #link("https://github.com/chius-me/globi-app")[#fa-icon("github", size: 0.85em)] #link("https://github.com/chius-me/globi-server")[#fa-icon("github", size: 0.85em)]'
+      - name: 'Globi-V 多模态辅助出行系统 #link("https://github.com/chius-me/globi-v")[#fa-icon("github", size: 0.85em) globi-v] · #link("https://github.com/chius-me/globi-app")[#fa-icon("github", size: 0.85em) globi-app] · #link("https://github.com/chius-me/globi-server")[#fa-icon("github", size: 0.85em) globi-server]'
         date: 2026-01 – 2026-07
         highlights:
-          - "担任队长，牵头设计面向视障用户与家属的多端系统，协同 Milk-V Duo S 视觉端、Flutter 双模式客户端与 FastAPI 后端，覆盖道路感知、语音交互、实时定位与紧急联络。"
-          - "在 SG2000 的 512 MB 内存与 0.5 TOPS INT8 TPU 约束下，完成交通灯、人行横道/导向箭头检测及盲道分割模型的训练、TPU-MLIR 量化转换与板端验证。"
-          - "使用 C/C++ 打通 GC2083 摄像头、VI/VPSS、CVI Runtime 与 H.264 RTSP 实时链路，以零拷贝方式送入 TPU；实测 INT8 推理约 117 ms/帧，并行推流约 28 FPS。"
-          - "负责 Flutter 客户端开发，实现视障/家属双模式、45 秒定位上报、地图追踪、8 位码绑定、语音 AI 助手与 SOS，并以安全存储保护 JWT、通过 GitHub Actions 自动构建发布 APK。"
-          - "定位并修复板端头文件/ABI 不一致导致的 SIGSEGV，完善正常退出与异常中断后的 MMF 资源清理和恢复流程，提升实时链路的可重复部署能力。"
+          - "使用 PyTorch 训练 YOLOv5s 交通灯/人行横道检测与 YOLOv8-Seg 盲道分割模型，经 TPU-MLIR 完成 ONNX 转换、INT8 量化与 CV181x 部署。"
+          - "基于 RISC-V 64 / musl 与 CVI Runtime 开发 C/C++ 板端推理程序，并裁剪 Buildroot SDK 修复 ABI 不一致导致的崩溃。"
+          - "构建 GC2083 → VI/VPSS → TPU → VENC/RTSP 零拷贝视觉管线，实现模型推理与 H.264 推流并行。"
 
     个人项目:
       - name: HomeLab 混合云平台
         date: 2024-01 – present
         highlights:
           - "基于 Proxmox VE 搭建家庭数据中心，运行 20 余台虚拟机与百余个容器，承载代码托管、应用部署及数据存储服务。"
-          - "使用 WireGuard 打通移动设备、HomeLab、AWS 及阿里云，构建覆盖本地基础设施与公有云的混合云网络架构。"
-          - "使用 TrueNAS 与 ZFS RAIDZ2 构建集中存储，并部署 MinIO 提供 S3 兼容对象存储服务。"
+          - "使用 WireGuard 打通移动设备、HomeLab、AWS 及阿里云；以 TrueNAS / ZFS 与 MinIO 提供集中与对象存储。"
           - "以 Forgejo 为 Git 中枢，结合 Forgejo Actions 与 Argo CD 将应用自动部署至 Kubernetes，实现 GitOps 自动化交付。"
       - name: AI Agent 工程实践
         date: 2025-06 – present
         highlights:
           - "持续使用 Codex、opencode 与 Hermes Agent 完成需求拆解、代码实现、测试验证和代码审查。"
           - "通过 Multica 将编码 Agent 接入任务看板与本地运行时，实现任务分派、进度跟踪和多 Agent 协作。"
-          - "编写与复用 Agent Skills 固化开发流程，并通过 MCP 接入外部工具与数据源，扩展 Agent 的上下文和执行能力。"
-      - name: Serverless 系列
-        date: 2025-12 – present
+          - "编写与复用 Agent Skills 固化开发流程，并通过 MCP 接入外部工具与数据源。"
+      - name: AI-Native 系列
         highlights:
-          - '#link("https://github.com/chius-me/ilist")[#fa-icon("github", size: 0.9em)] ilist: 基于 Cloudflare Workers 的多存储文件管理平台，支持 OneDrive、Google Drive 与 S3 — #link("https://ilist.chius.cc")[ilist.chius.cc]'
-          - '#link("https://github.com/chius-me/uptime-worker")[#fa-icon("github", size: 0.9em)] uptime-worker: 基于 Cloudflare Workers 的可用性监控平台，支持 HTTP/TCP 探测与故障告警 — #link("https://status.chius.cc")[status.chius.cc]'
-          - '#link("https://github.com/chius-me/chius.cc")[#fa-icon("github", size: 0.9em)] chius.cc: 基于 Hugo 与 Cloudflare Workers 构建个人网站，聚合技术文章、履历与 Fediverse 内容 — #link("https://chius.cc")[chius.cc]'
+          - '#link("https://github.com/chius-me/minecraft-admin-mcp")[#fa-icon("github", size: 0.9em)] minecraft-admin-mcp：自托管 MCP Server，为 Agent 提供权限可控的 Minecraft Java 服管理工具集。'
+          - '#link("https://github.com/chius-me/comfy-helper")[#fa-icon("github", size: 0.9em)] comfy-helper：FastAPI 网关，以命名 Profile 调用 ComfyUI 工作流并管理任务与产物。'
+      - name: Serverless 系列
+        highlights:
+          - '#link("https://github.com/shuaiplus/nodewarden")[#fa-icon("github", size: 0.9em)] NodeWarden：参与基于 Cloudflare Workers 的 Bitwarden 兼容密码管理服务端（3.6k Star），贡献 WebSocket 鉴权加固，避免 JWT 经 URL 查询参数泄露 — #link("https://nodewarden.app")[nodewarden.app]。'
+          - '#link("https://github.com/chius-me/ilist")[#fa-icon("github", size: 0.9em)] ilist：基于 Cloudflare Workers 的多存储文件管理平台，支持 OneDrive、Google Drive 与 S3 — #link("https://ilist.chius.dev")[ilist.chius.dev]。'
+          - '#link("https://github.com/chius-me/uptime-worker")[#fa-icon("github", size: 0.9em)] uptime-worker：基于 Cloudflare Workers 的可用性监控平台，支持 HTTP/TCP 探测与故障告警 — #link("https://status.chius.dev")[status.chius.dev]。'
+          - '#link("https://github.com/chius-me/chius.cc")[#fa-icon("github", size: 0.9em)] chius.cc：基于 Hugo 与 Cloudflare Workers 构建个人网站，聚合技术文章、履历与 Fediverse 内容 — #link("https://chius.cc")[chius.cc]。'
 
 locale:
   language: mandarin_chinese
@@ -98,10 +100,10 @@ design:
   theme: engineeringresumes
   page:
     size: a4
-    top_margin: 0.25in
-    bottom_margin: 0.28in
-    left_margin: 0.45in
-    right_margin: 0.45in
+    top_margin: 0.26in
+    bottom_margin: 0.26in
+    left_margin: 0.48in
+    right_margin: 0.48in
     show_footer: true
   templates:
     footer: "最新在线简历：[chius.cc/cv.pdf](https://chius.cc/cv.pdf)"
@@ -111,9 +113,9 @@ design:
       show_icons: true
     space_below_name: 0.18cm
     space_below_headline: 0.18cm
-    space_below_connections: 0.2cm
+    space_below_connections: 0.22cm
   section_titles:
-    space_above: 0.15cm
+    space_above: 0.16cm
     space_below: 0.08cm
   sections:
     space_between_regular_entries: 0.07cm
@@ -123,8 +125,8 @@ design:
       space_between_items: 0.05cm
   typography:
     font_size:
-      body: 10pt
-      headline: 9.8pt
+      body: 9.8pt
+      headline: 9.6pt
       connections: 9.5pt
       section_titles: 1.16em
     line_spacing: 0.55em
